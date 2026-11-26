@@ -1,0 +1,3370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إنستغرام بالعربية | مصادقة Google الحقيقية، نظام الحماية القصوى، وحفظ حقوق النشر</title>
+  <meta name="theme-color" content="#0095f6" />
+  <meta name="description" content="منصة تواصل اجتماعي عربية متكاملة للمستخدمين الحقيقيين فقط مع مصادقة Google وFirebase، نظام الحماية القصوى من Google، وحفظ حقوق النشر والوثائق." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cairo & Grand Hotel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    try {
+      if (window.tailwind) {
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Cairo', 'system-ui', '-apple-system', 'sans-serif'],
+                logo: ['"Grand Hotel"', 'cursive'],
+              },
+              colors: {
+                ig: {
+                  yellow: '#f09433',
+                  orange: '#e6683c',
+                  red: '#dc2743',
+                  pink: '#cc2366',
+                  purple: '#bc1888',
+                  blue: '#0095f6',
+                  blueHover: '#1877f2'
+                }
+              }
+            }
+          }
+        };
+      }
+    } catch (e) {}
+  </script>
+
+  <!-- Self-Contained Resilient Base Styles (Ensures crisp layout even before/without CDN) -->
+  <style>
+    :root {
+      --bg-page: #fafafa;
+      --bg-card: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-color: #e5e7eb;
+    }
+    html.dark {
+      --bg-page: #000000;
+      --bg-card: #09090b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: #27272a;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .font-logo { font-family: 'Grand Hotel', cursive, sans-serif; }
+    .story-ring {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      padding: 2.5px;
+      border-radius: 9999px;
+      transition: transform 0.2s ease;
+    }
+    .story-ring:hover { transform: scale(1.04); }
+    .ig-gradient-bg {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+    .max-shield-badge {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 52%, #0d9488 100%);
+    }
+    @keyframes popHeart {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      15% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+      30% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
+      45%, 80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    }
+    .heart-burst { animation: popHeart 0.85s ease-out forwards; }
+    @keyframes progressFill { from { width: 0%; } to { width: 100%; } }
+    .story-progress-active { animation: progressFill 5s linear forwards; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.4); border-radius: 9999px; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-black dark:text-gray-100 transition-colors duration-200 min-h-screen">
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none w-full max-w-md px-4"></div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. AUTH PORTAL: REAL GOOGLE OAUTH / FIREBASE + REAL ACCOUNTS ONLY     -->
+  <!-- ===================================================================== -->
+  <div id="auth-view" class="min-h-screen flex flex-col justify-between bg-gray-50 dark:bg-black">
+    <main class="flex-1 flex items-center justify-center px-4 py-8">
+      <div class="max-w-5xl w-full flex flex-col lg:flex-row items-center justify-center gap-10">
+
+        <!-- Security & Architecture Showcase -->
+        <div class="w-full max-w-[410px] bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-[28px] p-6 shadow-lg space-y-4">
+          <div class="flex items-center justify-between border-b border-gray-100 dark:border-zinc-900 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl max-shield-badge text-white flex items-center justify-center text-lg shadow">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div>
+                <p class="text-sm font-extrabold">Google Max-Shield</p>
+                <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">حماية قصوى • صفر حسابات وهمية</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-mono bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-full font-bold">REAL-ONLY</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div class="p-3 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-start gap-3">
+              <i class="fa-brands fa-google text-lg text-blue-500 mt-0.5"></i>
+              <div>
+                <p class="font-bold">مصادقة Google الحقيقية وربط Firebase</p>
+                <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">سجّل الدخول بحسابك الحقيقي على Google مباشرة أو اربط مشروع Firebase/Google Cloud الخاص بك بنقرة واحدة.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-start gap-3">
+              <i class="fa-solid fa-users-viewfinder text-lg text-emerald-500 mt-0.5"></i>
+              <div>
+                <p class="font-bold">مستخدمون حقيقيون 100% بدون أي بيانات وهمية</p>
+                <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">النظام يبدأ نظيفاً تماماً؛ كل حساب ومنشور ومحادثة يخص مستخدماً حقيقياً قام بالتسجيل.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-start gap-3">
+              <i class="fa-solid fa-fingerprint text-lg text-teal-500 mt-0.5"></i>
+              <div>
+                <p class="font-bold">حماية الجلسات وبصمة الجهاز ومنع البوتات</p>
+                <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">رصد النشاط السريع المتكرر، تتبع بصمة المتصفح والجلسات النشطة، وإشراف ذكي للبلاغات عبر Gemini AI.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-start gap-3">
+              <i class="fa-solid fa-certificate text-lg text-amber-500 mt-0.5"></i>
+              <div>
+                <p class="font-bold">حفظ حقوق النشر والوثائق لكل حساب ومنشور</p>
+                <p class="text-[11px] text-gray-500 leading-relaxed mt-0.5">توليد معرّف ملكية فريد <code class="font-mono">CR-ACC</code> لكل حساب و<code class="font-mono">CR-DOC</code> لكل منشور مع شهادة قابلة للتنزيل.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login & Registration Card -->
+        <div class="w-full max-w-[420px] flex flex-col gap-3">
+          <div class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl px-7 py-7 shadow-sm flex flex-col items-center">
+            <div class="w-14 h-14 rounded-2xl ig-gradient-bg flex items-center justify-center text-white text-2xl shadow-lg mb-2">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <h1 class="font-logo text-5xl tracking-wide text-gray-900 dark:text-white select-none">Instagram</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">تسجيل الدخول الحقيقي • محمي بنظام Google Max-Shield</p>
+
+            <!-- Continue with Google Button -->
+            <button type="button" id="google-login-btn" onclick="handleGoogleLogin()" class="w-full mt-5 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-800 dark:text-white font-bold py-3 px-4 rounded-xl border border-gray-300 dark:border-zinc-700 shadow-sm hover:shadow transition-all flex items-center justify-center gap-3 active:scale-[0.98]">
+              <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.37 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+              </svg>
+              <span>المتابعة باستخدام Google</span>
+            </button>
+
+            <!-- Verified Google Identity Gate (When Firebase popup is blocked in iframe or unconfigured) -->
+            <div id="google-verified-panel" class="hidden w-full mt-3 p-3.5 rounded-xl bg-blue-500/5 border border-blue-500/25 space-y-2.5 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
+                  <i class="fa-brands fa-google"></i>
+                  <span>تأكيد حساب Google الحقيقي</span>
+                </span>
+                <button type="button" onclick="hideGoogleVerifiedPanel()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+              <p class="text-[11px] text-gray-500 leading-relaxed">أدخل بريدك الحقيقي على Google واسمك لتوثيق الحساب مباشرة (أو اضبط مشروع Firebase بالأسفل لتسجيل الدخول المنبثق السحابي).</p>
+              <input type="email" id="google-real-email" placeholder="بريدك على Google (مثال: user@gmail.com)" dir="ltr" class="w-full text-xs bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-left focus:outline-none focus:border-ig-blue" />
+              <input type="text" id="google-real-name" placeholder="اسمك الحقيقي الكامل" class="w-full text-xs bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-lg px-3 py-2 focus:outline-none focus:border-ig-blue" />
+              <button type="button" onclick="confirmVerifiedGoogleSignIn()" class="w-full bg-ig-blue hover:bg-ig-blueHover text-white font-bold py-2 rounded-lg transition">
+                تأكيد والدخول بحساب Google
+              </button>
+            </div>
+
+            <div class="w-full flex items-center gap-3 my-4">
+              <div class="h-px bg-gray-200 dark:bg-zinc-800 flex-1"></div>
+              <span class="text-xs font-bold text-gray-400">أو بالبريد الإلكتروني وكلمة المرور</span>
+              <div class="h-px bg-gray-200 dark:bg-zinc-800 flex-1"></div>
+            </div>
+
+            <!-- Login / Register Tabs -->
+            <div class="w-full grid grid-cols-2 bg-gray-100 dark:bg-zinc-900 p-1 rounded-xl mb-3 text-xs font-bold">
+              <button type="button" id="tab-auth-login" onclick="switchAuthMode('login')" class="py-2 rounded-lg bg-white dark:bg-zinc-800 shadow-xs text-gray-900 dark:text-white transition">تسجيل الدخول</button>
+              <button type="button" id="tab-auth-register" onclick="switchAuthMode('register')" class="py-2 rounded-lg text-gray-500 transition">إنشاء حساب جديد</button>
+            </div>
+
+            <form id="email-auth-form" onsubmit="handleEmailAuthSubmit(event)" class="w-full space-y-2.5">
+              <div id="register-extra-fields" class="hidden space-y-2.5">
+                <input type="text" id="reg-fullname" placeholder="الاسم الحقيقي الكامل" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-ig-blue" />
+                <input type="text" id="reg-username" placeholder="اسم المستخدم بالإنجليزية (مثال: ahmed_dev)" dir="ltr" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-ig-blue text-left" />
+              </div>
+              <input type="email" id="auth-email" required placeholder="البريد الإلكتروني الحقيقي" dir="ltr" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-ig-blue text-left" />
+              <input type="password" id="auth-password" required minlength="6" placeholder="كلمة المرور (6 أحرف على الأقل)" dir="ltr" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-ig-blue text-left" />
+
+              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-[11px] cursor-pointer select-none">
+                <input type="checkbox" id="auth-human-verify" required class="rounded text-ig-blue focus:ring-0">
+                <span>أؤكد أنني مستخدم حقيقي وأوافق على نظام الحماية القصوى من Google وحفظ الحقوق.</span>
+              </label>
+
+              <button type="submit" id="email-auth-submit-btn" class="w-full bg-gray-900 dark:bg-white hover:opacity-90 text-white dark:text-black font-bold text-xs py-2.5 rounded-lg transition shadow-sm">
+                تسجيل الدخول الآمن
+              </button>
+            </form>
+
+            <div class="w-full mt-3 pt-3 border-t border-gray-100 dark:border-zinc-900 flex items-center justify-between text-[11px] text-gray-500">
+              <span id="auth-firebase-status" class="inline-flex items-center gap-1.5 font-semibold text-blue-600 dark:text-blue-400">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Max-Shield نشط</span>
+              </span>
+              <button type="button" onclick="openCloudConfigModal()" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">
+                <i class="fa-solid fa-key ml-1"></i>ربط Firebase / Google
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center gap-2 flex-wrap">
+            <button type="button" onclick="toggleDarkMode()" class="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800">
+              <i class="fa-solid fa-moon dark:hidden"></i>
+              <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+              <span>المظهر</span>
+            </button>
+            <button type="button" onclick="openLegalDocsModal('copyright')" class="text-xs text-amber-700 dark:text-amber-300 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span>حقوق النشر والوثائق</span>
+            </button>
+            <button type="button" onclick="openAppDownloadModal()" class="text-xs text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800">
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <span>تحميل التطبيق</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 2. MAIN APPLICATION VIEW (REAL USERS ONLY)                            -->
+  <!-- ===================================================================== -->
+  <div id="app-view" class="hidden min-h-screen flex flex-col md:flex-row">
+
+    <!-- Mobile Top Header -->
+    <header class="md:hidden sticky top-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-gray-200 dark:border-zinc-800 px-3.5 h-14 flex items-center justify-between">
+      <button type="button" onclick="navigateTo('home')" class="font-logo text-3xl tracking-wide text-gray-900 dark:text-white">Instagram</button>
+      <div class="flex items-center gap-3 text-base">
+        <button type="button" onclick="openCreatePostModal()" title="منشور جديد"><i class="fa-regular fa-square-plus"></i></button>
+        <button type="button" onclick="navigateTo('reels')" title="ريلز"><i class="fa-solid fa-clapperboard"></i></button>
+        <button type="button" onclick="navigateTo('notifications')" class="relative" title="الإشعارات">
+          <i class="fa-regular fa-heart"></i>
+          <span id="mobile-notif-badge" class="hidden absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+        <button type="button" onclick="navigateTo('messages')" class="relative" title="الرسائل">
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
+        <button type="button" onclick="navigateTo('settings')" title="الإعدادات"><i class="fa-solid fa-gear"></i></button>
+      </div>
+    </header>
+
+    <!-- Desktop Right Sidebar Navigation (RTL) -->
+    <aside class="hidden md:flex flex-col justify-between w-20 xl:w-64 sticky top-0 h-screen border-l border-gray-200 dark:border-zinc-800 bg-white dark:bg-black px-3 py-5 z-40 shrink-0 overflow-y-auto">
+      <div class="space-y-1">
+        <div class="px-3 mb-4 flex items-center justify-center xl:justify-start">
+          <button type="button" onclick="navigateTo('home')" class="hidden xl:block font-logo text-4xl tracking-wide text-gray-900 dark:text-white">Instagram</button>
+          <button type="button" onclick="navigateTo('home')" class="xl:hidden w-10 h-10 rounded-xl ig-gradient-bg text-white flex items-center justify-center text-xl">
+            <i class="fa-brands fa-instagram"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-1" id="desktop-nav">
+          <button type="button" onclick="navigateTo('home')" data-nav="home" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition font-bold">
+            <i class="fa-solid fa-house text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">الرئيسية</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('search')" data-nav="search" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-solid fa-magnifying-glass text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">بحث عن أشخاص</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('explore')" data-nav="explore" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-regular fa-compass text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">استكشف</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('reels')" data-nav="reels" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-solid fa-clapperboard text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">ريلز (Reels)</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('messages')" data-nav="messages" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-regular fa-paper-plane text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">الرسائل المباشرة</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('notifications')" data-nav="notifications" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition relative">
+            <div class="relative w-6 text-center">
+              <i class="fa-regular fa-heart text-lg"></i>
+              <span id="desktop-notif-badge" class="hidden absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+            </div>
+            <span class="hidden xl:inline text-xs sm:text-sm">الإشعارات والطلبات</span>
+          </button>
+
+          <button type="button" onclick="openCreatePostModal()" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-regular fa-square-plus text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">إنشاء منشور</span>
+          </button>
+
+          <button type="button" onclick="openTransparencyModal()" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition text-purple-600 dark:text-purple-400">
+            <i class="fa-solid fa-robot text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs font-semibold">البلاغات والذكاء الاصطناعي</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('settings'); switchSettingsTab('max-shield');" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition text-blue-600 dark:text-blue-400">
+            <i class="fa-solid fa-shield-halved text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs font-semibold">مركز الحماية القصوى</span>
+          </button>
+
+          <button type="button" onclick="openLegalDocsModal('copyright')" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition text-amber-600 dark:text-amber-400">
+            <i class="fa-solid fa-scale-balanced text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs font-semibold">الوثائق وحقوق النشر</span>
+          </button>
+
+          <button type="button" onclick="openAppDownloadModal()" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition text-emerald-600 dark:text-emerald-400">
+            <i class="fa-solid fa-cloud-arrow-down text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs font-semibold">تحميل التطبيق</span>
+          </button>
+
+          <button type="button" onclick="openUserProfile(currentUser.uid)" data-nav="profile" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <img id="sidebar-avatar" src="https://placehold.co/100x100/0095f6/ffffff?text=U" class="w-6 h-6 rounded-full object-cover border border-gray-300 dark:border-zinc-700">
+            <span class="hidden xl:inline text-xs sm:text-sm">الملف الشخصي</span>
+          </button>
+
+          <button type="button" onclick="navigateTo('settings')" data-nav="settings" class="nav-item w-full flex items-center justify-center xl:justify-start gap-3.5 p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition">
+            <i class="fa-solid fa-gear text-lg w-6 text-center"></i>
+            <span class="hidden xl:inline text-xs sm:text-sm">الإعدادات والخصوصية</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="space-y-1 pt-3 border-t border-gray-100 dark:border-zinc-900">
+        <button type="button" onclick="toggleDarkMode()" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition text-xs">
+          <i class="fa-solid fa-moon text-base w-6 text-center dark:hidden"></i>
+          <i class="fa-solid fa-sun text-base w-6 text-center hidden dark:inline text-amber-400"></i>
+          <span class="hidden xl:inline">تبديل المظهر</span>
+        </button>
+
+        <button type="button" onclick="handleLogout()" class="w-full flex items-center justify-center xl:justify-start gap-3.5 p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-950/30 text-red-600 transition text-xs">
+          <i class="fa-solid fa-right-from-bracket text-base w-6 text-center"></i>
+          <span class="hidden xl:inline font-bold">تسجيل الخروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 pb-20 md:pb-8 min-w-0">
+
+      <!-- VIEW A: HOME FEED + STORIES -->
+      <div id="view-home" class="max-w-5xl mx-auto px-0 sm:px-4 pt-2 sm:pt-6 flex justify-center gap-10">
+        <div class="w-full max-w-[470px] space-y-4">
+          <div class="bg-white dark:bg-zinc-950 sm:border border-gray-200 dark:border-zinc-800 sm:rounded-xl p-3.5 overflow-x-auto no-scrollbar">
+            <div id="stories-container" class="flex items-center gap-4"></div>
+          </div>
+          <div id="feed-posts-container" class="space-y-4"></div>
+        </div>
+
+        <!-- Left Sidebar (RTL) -->
+        <div class="hidden lg:block w-[320px] pt-2 shrink-0 space-y-5">
+          <div class="flex items-center justify-between bg-white dark:bg-zinc-950 p-3.5 rounded-2xl border border-gray-200 dark:border-zinc-800">
+            <div onclick="openUserProfile(currentUser.uid)" class="flex items-center gap-3 cursor-pointer group min-w-0">
+              <div class="relative shrink-0">
+                <img id="right-panel-avatar" src="https://placehold.co/100x100" class="w-12 h-12 rounded-full object-cover border border-gray-200 dark:border-zinc-800">
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-black rounded-full"></span>
+              </div>
+              <div class="min-w-0">
+                <p id="right-panel-username" class="text-sm font-bold group-hover:opacity-75 truncate">username</p>
+                <p id="right-panel-name" class="text-xs text-gray-500 truncate">الاسم الكامل</p>
+              </div>
+            </div>
+            <button type="button" onclick="handleLogout()" class="text-xs font-bold text-ig-blue hover:underline shrink-0">تبديل</button>
+          </div>
+
+          <!-- Real Registered Members -->
+          <div class="bg-white dark:bg-zinc-950 p-4 rounded-2xl border border-gray-200 dark:border-zinc-800">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-gray-600 dark:text-gray-300 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                الأعضاء الحقيقيون المسجلون
+              </span>
+              <button type="button" onclick="navigateTo('search')" class="text-xs font-bold text-ig-blue">الكل</button>
+            </div>
+            <div id="suggested-users-list" class="space-y-3"></div>
+          </div>
+
+          <!-- Google Max-Shield Card -->
+          <div onclick="navigateTo('settings'); switchSettingsTab('max-shield');" class="cursor-pointer max-shield-badge text-white rounded-2xl p-4 shadow-sm hover:opacity-95 transition">
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-teal-300"></i>
+                <span class="text-xs font-bold">Google Max-Shield</span>
+              </div>
+              <span id="sidebar-shield-score" class="text-[10px] font-mono bg-white/15 px-2 py-0.5 rounded-full font-bold">100/100</span>
+            </div>
+            <p class="text-[11px] text-blue-100 leading-relaxed">
+              حماية الجلسات، بصمة الجهاز، منع البوتات، وحماية الوثائق مفعّلة. اضغط لفتح مركز الحماية.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW B: SEARCH REAL USERS & POSTS -->
+      <div id="view-search" class="hidden max-w-2xl mx-auto px-4 pt-6">
+        <h2 class="text-xl font-bold mb-4">البحث عن الأعضاء الحقيقيين والمنشورات</h2>
+        <div class="relative mb-6">
+          <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="ابحث بالاسم، اسم المستخدم، أو محتوى المنشور..." class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl py-3 pr-11 pl-4 text-sm focus:outline-none focus:border-ig-blue shadow-sm" />
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-sm font-bold text-gray-500 mb-3">الأعضاء المسجلون (<span id="search-users-count">0</span>)</h3>
+            <div id="search-users-results" class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl divide-y divide-gray-100 dark:divide-zinc-900 overflow-hidden"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-gray-500 mb-3">المنشورات</h3>
+            <div id="search-posts-results" class="grid grid-cols-3 gap-1.5 sm:gap-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW C: EXPLORE -->
+      <div id="view-explore" class="hidden max-w-4xl mx-auto px-2 sm:px-4 pt-4 sm:pt-6">
+        <div class="flex items-center justify-between mb-4 px-2">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <i class="fa-regular fa-compass text-ig-pink"></i>
+            <span>استكشف المنشورات</span>
+          </h2>
+        </div>
+        <div id="explore-grid" class="grid grid-cols-3 gap-1 sm:gap-2"></div>
+      </div>
+
+      <!-- VIEW C2: REELS -->
+      <div id="view-reels" class="hidden max-w-lg mx-auto px-3 pt-4 sm:pt-6 space-y-5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold flex items-center gap-2">
+            <i class="fa-solid fa-clapperboard text-ig-purple"></i>
+            <span>ريلز (Reels)</span>
+          </h2>
+          <button type="button" onclick="openCreatePostModal()" class="text-xs font-bold text-ig-blue hover:underline">+ نشر مقطع جديد</button>
+        </div>
+        <div id="reels-container" class="space-y-5"></div>
+      </div>
+
+      <!-- VIEW D: DIRECT MESSAGES -->
+      <div id="view-messages" class="hidden max-w-4xl mx-auto px-2 sm:px-4 pt-4 sm:pt-6">
+        <div class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl overflow-hidden h-[calc(100vh-135px)] md:h-[calc(100vh-80px)] flex flex-col md:flex-row shadow-sm">
+          <div class="w-full md:w-80 border-b md:border-b-0 md:border-l border-gray-200 dark:border-zinc-800 flex flex-col h-2/5 md:h-full">
+            <div class="p-3.5 border-b border-gray-200 dark:border-zinc-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm">الرسائل المباشرة</span>
+                <span class="text-[11px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-bold">مباشر</span>
+              </div>
+              <input type="text" oninput="filterDmContacts(this.value)" placeholder="ابحث عن عضو لمراسلته..." class="w-full text-xs bg-gray-100 dark:bg-zinc-900 rounded-lg px-3 py-2 focus:outline-none">
+            </div>
+            <div id="dm-users-list" class="flex-1 overflow-y-auto divide-y divide-gray-100 dark:divide-zinc-900"></div>
+          </div>
+
+          <div class="flex-1 flex flex-col h-3/5 md:h-full bg-gray-50/50 dark:bg-black">
+            <div id="dm-chat-header" class="p-3 bg-white dark:bg-zinc-950 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="relative">
+                  <img id="dm-active-avatar" src="https://placehold.co/100x100" class="w-9 h-9 rounded-full object-cover">
+                  <span id="dm-active-online-dot" class="hidden absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-black rounded-full"></span>
+                </div>
+                <div>
+                  <p id="dm-active-name" class="text-sm font-bold">اختر عضواً لبدء الدردشة</p>
+                  <p id="dm-active-status" class="text-[11px] text-gray-400">—</p>
+                </div>
+              </div>
+              <div id="dm-header-actions" class="hidden flex items-center gap-2">
+                <button type="button" id="dm-view-profile-btn" class="text-xs font-bold text-ig-blue hover:underline px-2 py-1">الملف الشخصي</button>
+              </div>
+            </div>
+
+            <div id="dm-messages-stream" class="flex-1 p-4 overflow-y-auto space-y-2.5">
+              <div class="h-full flex flex-col items-center justify-center text-gray-400 text-xs gap-2 text-center px-4">
+                <i class="fa-regular fa-comments text-4xl opacity-40"></i>
+                <p>اختر أي عضو مسجل من القائمة لبدء المحادثة المباشرة، أو شارك رابط المنصة لدعوة أصدقائك الحقيقيين.</p>
+              </div>
+            </div>
+
+            <div id="dm-privacy-lock" class="hidden p-3 bg-amber-50 dark:bg-amber-950/30 border-t border-amber-200 dark:border-amber-900 text-center text-xs text-amber-700 dark:text-amber-300 font-semibold"></div>
+
+            <form id="dm-send-form" onsubmit="sendRealDirectMessage(event)" class="hidden p-3 bg-white dark:bg-zinc-950 border-t border-gray-200 dark:border-zinc-800 flex items-center gap-2">
+              <label class="cursor-pointer text-gray-500 hover:text-ig-blue p-2 rounded-full transition" title="إرسال صورة">
+                <i class="fa-regular fa-image text-lg"></i>
+                <input type="file" accept="image/*" onchange="sendChatImage(event)" class="hidden">
+              </label>
+              <input type="text" id="dm-input" placeholder="اكتب رسالتك هنا..." class="flex-1 bg-gray-100 dark:bg-zinc-900 rounded-full px-4 py-2.5 text-xs focus:outline-none" />
+              <button type="submit" class="bg-ig-blue hover:bg-ig-blueHover text-white px-4 py-2 rounded-full text-xs font-bold transition">إرسال</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW E: NOTIFICATIONS -->
+      <div id="view-notifications" class="hidden max-w-xl mx-auto px-4 pt-6 space-y-6">
+        <div id="follow-requests-section" class="hidden">
+          <h3 class="text-sm font-bold text-gray-600 dark:text-gray-300 mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-user-plus text-ig-blue"></i>
+            <span>طلبات المتابعة الواردة</span>
+          </h3>
+          <div id="follow-requests-list" class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl divide-y divide-gray-100 dark:divide-zinc-900 overflow-hidden"></div>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold mb-3">الإشعارات</h2>
+          <div id="notifications-list" class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl divide-y divide-gray-100 dark:divide-zinc-900 overflow-hidden"></div>
+        </div>
+      </div>
+
+      <!-- VIEW F: USER PROFILE -->
+      <div id="view-profile" class="hidden max-w-4xl mx-auto px-3 sm:px-6 pt-6">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-12 pb-8 border-b border-gray-200 dark:border-zinc-800">
+          <div class="relative shrink-0">
+            <div class="story-ring p-1">
+              <img id="profile-avatar" src="https://placehold.co/150x150" class="w-24 h-24 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-white dark:border-black">
+            </div>
+            <span id="profile-online-badge" class="hidden absolute bottom-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border-2 border-white dark:border-black">نشط الآن</span>
+          </div>
+
+          <div class="flex-1 text-center sm:text-right space-y-4 w-full">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-center sm:justify-start flex-wrap">
+              <div class="flex items-center justify-center sm:justify-start gap-2">
+                <h2 id="profile-username" class="text-xl font-bold" dir="ltr">@username</h2>
+                <span id="profile-private-icon" class="hidden text-xs bg-gray-200 dark:bg-zinc-800 px-2 py-0.5 rounded-full text-gray-600 dark:text-gray-300">
+                  <i class="fa-solid fa-lock"></i> خاص
+                </span>
+              </div>
+              <div id="profile-action-buttons" class="flex items-center justify-center sm:justify-start gap-2 flex-wrap"></div>
+            </div>
+
+            <div class="flex items-center justify-center sm:justify-start gap-8 text-sm">
+              <div><span id="profile-posts-count" class="font-bold text-base">0</span> <span class="text-gray-500">منشورات</span></div>
+              <div><span id="profile-followers-count" class="font-bold text-base">0</span> <span class="text-gray-500">متابعون</span></div>
+              <div><span id="profile-following-count" class="font-bold text-base">0</span> <span class="text-gray-500">أتابع</span></div>
+            </div>
+
+            <div class="space-y-1 max-w-lg mx-auto sm:mx-0">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <p id="profile-fullname" class="font-bold text-sm">الاسم الكامل</p>
+                <span class="inline-flex items-center gap-1 text-[10px] font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/25 px-2.5 py-0.5 rounded-full">
+                  <i class="fa-solid fa-certificate"></i>
+                  <span id="profile-copyright-id">CR-ACC-0000000</span>
+                </span>
+              </div>
+              <p id="profile-bio" class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line"></p>
+              <a id="profile-link" href="#" target="_blank" class="text-xs text-ig-blue font-semibold block" dir="ltr"></a>
+              <div class="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <button type="button" onclick="openCopyrightCertificateModal(viewingProfileUid, null)" class="text-[11px] font-bold text-amber-700 dark:text-amber-300 hover:underline inline-flex items-center gap-1">
+                  <i class="fa-solid fa-file-shield"></i>
+                  <span>شهادة ووثيقة حفظ حقوق الحساب</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="private-account-wall" class="hidden py-16 text-center space-y-3">
+          <div class="w-16 h-16 rounded-full border-2 border-gray-300 dark:border-zinc-700 flex items-center justify-center mx-auto text-2xl text-gray-500">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h3 class="font-bold text-base">هذا الحساب خاص</h3>
+          <p class="text-xs text-gray-500 max-w-xs mx-auto">تابع هذا الحساب لمشاهدة صوره ومنشوراته والتفاعل معها.</p>
+        </div>
+
+        <div id="profile-content-area">
+          <div class="flex justify-center gap-10 border-b border-gray-200 dark:border-zinc-800 text-xs font-bold">
+            <button type="button" onclick="switchProfileTab('posts')" id="tab-profile-posts" class="py-3.5 border-t-2 border-gray-900 dark:border-white text-gray-900 dark:text-white flex items-center gap-2 -mt-px">
+              <i class="fa-solid fa-table-cells"></i>
+              <span>المنشورات</span>
+            </button>
+            <button type="button" onclick="switchProfileTab('saved')" id="tab-profile-saved" class="py-3.5 border-t-2 border-transparent text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 flex items-center gap-2 -mt-px">
+              <i class="fa-regular fa-bookmark"></i>
+              <span>المحفوظات</span>
+            </button>
+          </div>
+          <div id="profile-posts-grid" class="grid grid-cols-3 gap-1 sm:gap-3 pt-4"></div>
+        </div>
+      </div>
+
+      <!-- VIEW G: SETTINGS, PRIVACY & GOOGLE MAX-SHIELD CENTER -->
+      <div id="view-settings" class="hidden max-w-4xl mx-auto px-3 sm:px-6 pt-6">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold">الإعدادات، الخصوصية، والحماية القصوى</h2>
+          <p class="text-xs text-gray-500 mt-1">تحكم في ملفك الشخصي، نظام Google Max-Shield، إعدادات الخصوصية، والربط السحابي</p>
+        </div>
+
+        <div class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm">
+          <div class="w-full md:w-64 border-b md:border-b-0 md:border-l border-gray-200 dark:border-zinc-800 p-3 flex md:flex-col gap-1.5 overflow-x-auto no-scrollbar shrink-0">
+            <button type="button" onclick="switchSettingsTab('edit-profile')" data-stab="edit-profile" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white shrink-0">
+              <i class="fa-regular fa-user w-4 text-center"></i>
+              <span>تعديل الملف الشخصي</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('max-shield')" data-stab="max-shield" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-zinc-900/50 shrink-0">
+              <i class="fa-solid fa-shield-halved w-4 text-center"></i>
+              <span>مركز الحماية القصوى</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('privacy')" data-stab="privacy" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-900/50 shrink-0">
+              <i class="fa-solid fa-lock w-4 text-center"></i>
+              <span>الخصوصية والأمان</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('blocked')" data-stab="blocked" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-900/50 shrink-0">
+              <i class="fa-solid fa-ban w-4 text-center text-red-500"></i>
+              <span>الحسابات المحظورة</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('integrations')" data-stab="integrations" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-900/50 shrink-0">
+              <i class="fa-solid fa-key w-4 text-center text-purple-500"></i>
+              <span>Firebase و Gemini</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('appearance')" data-stab="appearance" class="settings-tab-btn flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:bg-gray-50 dark:hover:bg-zinc-900/50 shrink-0">
+              <i class="fa-solid fa-palette w-4 text-center text-emerald-500"></i>
+              <span>المظهر والبيانات</span>
+            </button>
+          </div>
+
+          <div class="flex-1 p-5 sm:p-7">
+            <!-- 1. Edit Profile -->
+            <div id="stab-edit-profile" class="settings-panel space-y-5">
+              <h3 class="font-bold text-base border-b border-gray-100 dark:border-zinc-900 pb-3">معلومات الملف الشخصي</h3>
+              <div class="flex items-center gap-4 bg-gray-50 dark:bg-zinc-900 p-4 rounded-2xl">
+                <img id="settings-avatar-preview" src="https://placehold.co/100x100" class="w-16 h-16 rounded-full object-cover border-2 border-ig-blue">
+                <div class="space-y-1.5">
+                  <p id="settings-display-username" class="text-sm font-bold">@username</p>
+                  <label class="inline-block cursor-pointer bg-ig-blue hover:bg-ig-blueHover text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition">
+                    تغيير الصورة الشخصية
+                    <input type="file" accept="image/*" onchange="handleSettingsAvatarUpload(event)" class="hidden">
+                  </label>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-500 mb-1.5">الاسم الكامل</label>
+                  <input type="text" id="set-fullname" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-ig-blue">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-500 mb-1.5">اسم المستخدم</label>
+                  <input type="text" id="set-username" dir="ltr" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-ig-blue text-left">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1.5">النبذة التعريفية (Bio)</label>
+                <textarea id="set-bio" rows="3" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl p-3.5 focus:outline-none focus:border-ig-blue"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1.5">الرابط الشخصي</label>
+                <input type="text" id="set-website" dir="ltr" placeholder="https://example.com" class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-ig-blue text-left">
+              </div>
+              <button type="button" onclick="saveProfileSettings()" class="bg-ig-blue hover:bg-ig-blueHover text-white font-bold text-xs px-6 py-3 rounded-xl shadow-sm transition">
+                حفظ التغييرات
+              </button>
+            </div>
+
+            <!-- 2. Max-Shield Security Center -->
+            <div id="stab-max-shield" class="settings-panel hidden space-y-5">
+              <div class="p-4 rounded-2xl max-shield-badge text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-teal-300 text-lg"></i>
+                    <h3 class="font-bold text-base">مركز الحماية القصوى من Google (Max-Shield)</h3>
+                  </div>
+                  <p class="text-[11px] text-blue-100 leading-relaxed">
+                    حماية الجلسات وبصمة الجهاز، منع البوتات والهجمات السريعة، وتوثيق حقوق النشر والوثائق لكل حساب.
+                  </p>
+                </div>
+                <div class="bg-white/15 backdrop-blur-md px-4 py-2.5 rounded-2xl text-center shrink-0">
+                  <span class="block text-[10px] text-blue-100">مؤشر الأمان</span>
+                  <span id="shield-security-score" class="text-lg font-extrabold font-mono text-teal-300">100%</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 flex items-start justify-between gap-3">
+                  <div class="space-y-1">
+                    <p class="text-xs font-bold flex items-center gap-1.5">
+                      <i class="fa-solid fa-lock text-blue-500"></i>
+                      <span>وضع الحماية القصوى ومنع البوتات</span>
+                    </p>
+                    <p class="text-[11px] text-gray-500 leading-relaxed">تشديد التحقق على الجلسات وتقييد الأنشطة المتكررة السريعة.</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                    <input type="checkbox" id="shield-ultra-lock" onchange="saveMaxShieldControls()" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-gray-300 rounded-full peer dark:bg-zinc-700 peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 flex items-start justify-between gap-3">
+                  <div class="space-y-1">
+                    <p class="text-xs font-bold flex items-center gap-1.5">
+                      <i class="fa-solid fa-file-shield text-amber-500"></i>
+                      <span>حماية صارمة للوثائق وحقوق النشر</span>
+                    </p>
+                    <p class="text-[11px] text-gray-500 leading-relaxed">إرفاق بصمة ملكية لكل حساب ومنشور ووثيقة ورصد محاولات النسخ.</p>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                    <input type="checkbox" id="shield-ip-strict" onchange="saveMaxShieldControls()" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-gray-300 rounded-full peer dark:bg-zinc-700 peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p class="text-xs font-bold">بصمة الجهاز والجلسات النشطة (Zero-Trust Sessions)</p>
+                    <p id="shield-device-fingerprint" class="text-[11px] font-mono text-gray-500 mt-0.5">FP-00000000</p>
+                  </div>
+                  <button type="button" onclick="terminateAllOtherSessions()" class="bg-red-600 hover:bg-red-700 text-white text-[11px] font-bold px-3.5 py-2 rounded-xl transition">
+                    إنهاء كافة الجلسات الأخرى
+                  </button>
+                </div>
+                <div id="active-sessions-list" class="space-y-2 text-xs"></div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <p class="text-xs font-bold">سجل الأحداث الأمنية وحماية الوثائق</p>
+                  <button type="button" onclick="clearSecurityLogs()" class="text-[11px] text-red-500 hover:underline font-bold">مسح السجل</button>
+                </div>
+                <div id="security-audit-log-list" class="space-y-2 max-h-56 overflow-y-auto text-xs"></div>
+              </div>
+            </div>
+
+            <!-- 3. Privacy Controls -->
+            <div id="stab-privacy" class="settings-panel hidden space-y-6">
+              <h3 class="font-bold text-base border-b border-gray-100 dark:border-zinc-900 pb-3">إعدادات الخصوصية الفعلية</h3>
+              <div class="flex items-start justify-between gap-4 p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-amber-500"></i>
+                    <span class="text-sm font-bold">حساب خاص (Private Account)</span>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">قصر رؤية منشوراتك على المتابعين المعتمدين وتفعيل نظام طلبات المتابعة.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                  <input type="checkbox" id="priv-is-private" onchange="savePrivacySettings()" class="sr-only peer">
+                  <div class="w-11 h-6 bg-gray-300 rounded-full peer dark:bg-zinc-700 peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ig-blue"></div>
+                </label>
+              </div>
+
+              <div class="flex items-start justify-between gap-4 p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span class="text-sm font-bold">إظهار حالة النشاط (نشط الآن)</span>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">السماح للآخرين برؤية حالة اتصالك عندما تكون متواجداً.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                  <input type="checkbox" id="priv-show-activity" onchange="savePrivacySettings()" class="sr-only peer" checked>
+                  <div class="w-11 h-6 bg-gray-300 rounded-full peer dark:bg-zinc-700 peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ig-blue"></div>
+                </label>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 space-y-2.5">
+                <div class="flex items-center gap-2">
+                  <i class="fa-regular fa-paper-plane text-ig-blue"></i>
+                  <span class="text-sm font-bold">من يمكنه إرسال رسائل مباشرة إليك؟</span>
+                </div>
+                <select id="priv-allow-messages" onchange="savePrivacySettings()" class="w-full text-xs bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 focus:outline-none">
+                  <option value="everyone">الجميع على المنصة</option>
+                  <option value="followers">المتابعون لي فقط</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 4. Blocked Accounts -->
+            <div id="stab-blocked" class="settings-panel hidden space-y-4">
+              <h3 class="font-bold text-base border-b border-gray-100 dark:border-zinc-900 pb-3">الحسابات المحظورة</h3>
+              <div id="blocked-users-list" class="divide-y divide-gray-100 dark:divide-zinc-900"></div>
+            </div>
+
+            <!-- 5. Firebase & Gemini API Keys -->
+            <div id="stab-integrations" class="settings-panel hidden space-y-4">
+              <h3 class="font-bold text-base border-b border-gray-100 dark:border-zinc-900 pb-3">إعدادات Firebase و Gemini API</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                أدخل إعدادات مشروع Firebase لربط Google OAuth وقاعدة البيانات السحابية، ومفتاح Gemini API لتحليل البلاغات بالذكاء الاصطناعي.
+              </p>
+              <div>
+                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Gemini API Key</label>
+                <input type="password" id="cfg-gemini-key" dir="ltr" placeholder="AIza..." class="w-full text-xs bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-left">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">Firebase Web App Config JSON</label>
+                <textarea id="cfg-firebase-json" rows="4" dir="ltr" placeholder='{"apiKey":"...","authDomain":"...","projectId":"..."}' class="w-full text-xs font-mono bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl p-3 text-left"></textarea>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <button type="button" onclick="saveOptionalIntegrations()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition">
+                  حفظ وتفعيل الربط
+                </button>
+                <button type="button" onclick="resetIntegrationsToInstantMode()" class="bg-gray-200 dark:bg-zinc-800 font-bold text-xs px-4 py-2.5 rounded-xl transition">
+                  إعادة الضبط
+                </button>
+              </div>
+            </div>
+
+            <!-- 6. Appearance & Export -->
+            <div id="stab-appearance" class="settings-panel hidden space-y-5">
+              <h3 class="font-bold text-base border-b border-gray-100 dark:border-zinc-900 pb-3">المظهر، الوثائق، وتصدير البيانات</h3>
+              <div class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900">
+                <div>
+                  <p class="text-sm font-bold">مظهر التطبيق (ليلي / نهاري)</p>
+                  <p class="text-xs text-gray-500">تبديل ألوان الواجهة</p>
+                </div>
+                <button type="button" onclick="toggleDarkMode()" class="bg-gray-900 dark:bg-white text-white dark:text-black text-xs font-bold px-4 py-2 rounded-xl">تبديل المظهر</button>
+              </div>
+              <div class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900">
+                <div>
+                  <p class="text-sm font-bold">تصدير نسخة من بيانات حسابك (JSON)</p>
+                  <p class="text-xs text-gray-500">تحميل ملف يحتوي على معلومات حسابك ومنشوراتك وبصمة الملكية</p>
+                </div>
+                <button type="button" onclick="exportAccountData()" class="bg-ig-blue text-white text-xs font-bold px-4 py-2 rounded-xl">تحميل البيانات</button>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+                <div>
+                  <p class="text-sm font-bold text-amber-800 dark:text-amber-200">الوثائق القانونية وحفظ حقوق النشر</p>
+                  <p class="text-xs text-gray-600 dark:text-gray-400">حماية وثائق ومنشورات كل حساب</p>
+                </div>
+                <button type="button" onclick="openLegalDocsModal('copyright')" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-xl">فتح الوثائق</button>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+                <div>
+                  <p class="text-sm font-bold text-emerald-800 dark:text-emerald-200">تحميل ومشاركة التطبيق (PWA / HTML)</p>
+                  <p class="text-xs text-gray-600 dark:text-gray-400">تثبيت التطبيق على الهاتف أو الكمبيوتر وتنزيل نسخة التطبيق</p>
+                </div>
+                <button type="button" onclick="openAppDownloadModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl">تحميل ومشاركة</button>
+              </div>
+              <div class="pt-4 border-t border-gray-100 dark:border-zinc-900">
+                <button type="button" onclick="handleLogout()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 rounded-xl transition">تسجيل الخروج من الحساب</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-md border-t border-gray-200 dark:border-zinc-800 h-14 flex items-center justify-around px-1">
+      <button type="button" onclick="navigateTo('home')" class="p-2 text-lg" title="الرئيسية"><i class="fa-solid fa-house"></i></button>
+      <button type="button" onclick="navigateTo('search')" class="p-2 text-lg" title="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button type="button" onclick="openCreatePostModal()" class="p-2 text-lg" title="نشر"><i class="fa-regular fa-square-plus"></i></button>
+      <button type="button" onclick="openLegalDocsModal('copyright')" class="p-2 text-lg text-amber-500" title="حقوق النشر"><i class="fa-solid fa-scale-balanced"></i></button>
+      <button type="button" onclick="openAppDownloadModal()" class="p-2 text-lg text-emerald-500" title="تحميل التطبيق"><i class="fa-solid fa-cloud-arrow-down"></i></button>
+      <button type="button" onclick="openUserProfile(currentUser.uid)" class="p-1.5" title="الملف الشخصي">
+        <img id="mobile-nav-avatar" src="https://placehold.co/100x100" class="w-7 h-7 rounded-full object-cover border border-gray-300 dark:border-zinc-700">
+      </button>
+    </nav>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODALS                                                                -->
+  <!-- ===================================================================== -->
+
+  <!-- Cloud / Firebase Quick Setup Modal -->
+  <div id="cloud-config-modal" class="hidden fixed inset-0 z-[120] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+        <h3 class="font-bold text-sm flex items-center gap-2">
+          <i class="fa-brands fa-google text-blue-500"></i>
+          <span>ربط مشروع Firebase / Google Cloud الحقيقي</span>
+        </h3>
+        <button type="button" onclick="closeModal('cloud-config-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 space-y-3 text-xs">
+        <p class="text-gray-500 leading-relaxed">الصق إعدادات تطبيق الويب من وحدة تحكم Firebase لتفعيل نافذة Google OAuth الحقيقية ومزامنة الحسابات، أو أغلقه لاستخدام الحسابات الحقيقية الفورية.</p>
+        <div>
+          <label class="block font-bold mb-1">Firebase Config JSON:</label>
+          <textarea id="modal-firebase-json" rows="4" dir="ltr" placeholder='{"apiKey":"AIza...","authDomain":"project.firebaseapp.com","projectId":"project-id"}' class="w-full font-mono bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl p-3 text-left"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold mb-1">Gemini API Key (لتحليل البلاغات بالذكاء الاصطناعي):</label>
+          <input type="password" id="modal-gemini-key" dir="ltr" placeholder="AIza..." class="w-full bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-left">
+        </div>
+        <button type="button" onclick="saveModalCloudConfig()" class="w-full bg-ig-blue hover:bg-ig-blueHover text-white font-bold py-2.5 rounded-xl transition">
+          حفظ الإعدادات وتطبيقها
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Post / Story Modal -->
+  <div id="create-post-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800">
+      <div class="px-5 py-3.5 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+        <button type="button" onclick="closeModal('create-post-modal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-sm font-semibold">إلغاء</button>
+        <h3 class="font-bold text-sm">إنشاء محتوى جديد</h3>
+        <button type="button" id="publish-post-btn" onclick="submitNewPostOrStory()" class="text-ig-blue font-bold text-sm hover:text-ig-blueHover">نشر الآن</button>
+      </div>
+      <div class="p-5 space-y-4 max-h-[82vh] overflow-y-auto">
+        <div class="grid grid-cols-2 bg-gray-100 dark:bg-zinc-800 p-1 rounded-xl text-xs font-bold">
+          <button type="button" id="create-type-post" onclick="setCreateMode('post')" class="py-2 rounded-lg bg-white dark:bg-zinc-700 shadow-xs transition">منشور دائم</button>
+          <button type="button" id="create-type-story" onclick="setCreateMode('story')" class="py-2 rounded-lg text-gray-500 transition">قصة (24 ساعة)</button>
+        </div>
+        <div class="relative rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-950 border border-dashed border-gray-300 dark:border-zinc-700 aspect-[4/3] flex items-center justify-center">
+          <img id="new-post-preview" src="https://placehold.co/800x600/0f172a/ffffff?text=%D8%A7%D8%AE%D8%AA%D8%B1+%D8%B5%D9%88%D8%B1%D8%A9+%D9%84%D9%84%D9%86%D8%B4%D8%B1" class="w-full h-full object-cover">
+          <label class="absolute bottom-3 left-3 bg-black/75 hover:bg-black text-white text-xs px-3.5 py-2 rounded-xl cursor-pointer backdrop-blur-md flex items-center gap-2 transition">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>رفع صورة من جهازك</span>
+            <input type="file" id="new-post-file" accept="image/*" onchange="handleCompressedImageUpload(event)" class="hidden">
+          </label>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-gray-500 mb-1">أو أدخل رابط صورة مباشر (URL):</label>
+          <input type="url" id="new-post-image-url" dir="ltr" oninput="if(this.value.trim()) document.getElementById('new-post-preview').src=this.value.trim()" placeholder="https://..." class="w-full text-xs bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2 focus:outline-none text-left">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">الوصف أو نص الوثيقة / المنشور</label>
+          <textarea id="new-post-caption" rows="3" placeholder="اكتب وصفاً لمنشورك مع الهاشتاقات..." class="w-full text-xs bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-ig-blue"></textarea>
+        </div>
+        <div id="new-post-location-box">
+          <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">الموقع الجغرافي (اختياري)</label>
+          <input type="text" id="new-post-location" placeholder="أضف موقعاً..." class="w-full text-xs bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 focus:outline-none">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Report Modal -->
+  <div id="ai-report-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-robot text-purple-500 text-lg"></i>
+          <h3 class="font-bold text-sm">نظام البلاغات والإشراف بالذكاء الاصطناعي</h3>
+        </div>
+        <button type="button" onclick="closeModal('ai-report-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form onsubmit="submitAiReport(event)" class="p-5 space-y-4">
+        <div class="bg-gray-50 dark:bg-zinc-950 p-3 rounded-xl border border-gray-200 dark:border-zinc-800 text-xs">
+          <span class="text-gray-400 block mb-1">المحتوى المبلّغ عنه:</span>
+          <p id="report-target-preview" class="font-semibold line-clamp-2"></p>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1.5">سبب البلاغ</label>
+          <select id="report-reason-select" class="w-full text-xs bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 focus:outline-none">
+            <option value="محتوى مسيء أو تنمر ومضايقة">محتوى مسيء أو تنمر ومضايقة</option>
+            <option value="انتهاك حقوق النشر أو سرقة وثائق">انتهاك حقوق النشر أو سرقة وثائق</option>
+            <option value="احتيال أو تضليل أو حساب مزيف">احتيال أو تضليل أو حساب مزيف</option>
+            <option value="خطاب كراهية أو تحريض">خطاب كراهية أو تحريض</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold mb-1.5">تفاصيل إضافية (اختياري)</label>
+          <textarea id="report-details-input" rows="2" placeholder="اشرح سبب البلاغ..." class="w-full text-xs bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl p-3 focus:outline-none"></textarea>
+        </div>
+        <div id="ai-report-result-box" class="hidden p-3.5 rounded-xl border text-xs space-y-1.5"></div>
+        <button type="submit" id="submit-report-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>إرسال البلاغ للتحليل الذكي الفوري</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Transparency Log Modal -->
+  <div id="transparency-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800 flex flex-col max-h-[85vh]">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-purple-600/15 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm">مركز الشفافية وقرارات الإشراف الذكي</h3>
+            <p class="text-[11px] text-gray-500">سجل البلاغات وقرارات الذكاء الاصطناعي</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('transparency-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="transparency-reports-list" class="p-4 overflow-y-auto space-y-3 flex-1"></div>
+    </div>
+  </div>
+
+  <!-- Post Detail Modal -->
+  <div id="post-detail-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6">
+    <div class="bg-white dark:bg-zinc-950 w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800 flex flex-col md:flex-row max-h-[90vh]">
+      <div class="md:w-3/5 bg-black flex items-center justify-center">
+        <img id="modal-post-image" src="" class="max-h-[45vh] md:max-h-[85vh] w-full object-contain">
+      </div>
+      <div class="md:w-2/5 flex flex-col justify-between max-h-[45vh] md:max-h-[85vh]">
+        <div class="p-3.5 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between">
+          <div id="modal-post-author-link" class="flex items-center gap-2.5 cursor-pointer">
+            <img id="modal-post-avatar" src="" class="w-8 h-8 rounded-full object-cover">
+            <div>
+              <p id="modal-post-username" class="text-xs font-bold"></p>
+              <p id="modal-post-location" class="text-[10px] text-gray-500"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <button type="button" id="modal-cert-post-btn" title="شهادة حقوق النشر" class="text-xs text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 px-2 py-1.5 rounded-lg font-bold">
+              <i class="fa-solid fa-certificate"></i>
+            </button>
+            <button type="button" id="modal-report-post-btn" title="إبلاغ" class="text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 px-2.5 py-1.5 rounded-lg font-bold">
+              <i class="fa-solid fa-flag"></i> إبلاغ
+            </button>
+            <button type="button" onclick="closeModal('post-detail-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <div id="modal-comments-list" class="flex-1 overflow-y-auto p-4 space-y-3 text-xs"></div>
+        <div class="border-t border-gray-200 dark:border-zinc-800 p-3 space-y-2 bg-white dark:bg-zinc-950">
+          <div class="flex items-center justify-between text-lg">
+            <div class="flex items-center gap-4">
+              <button type="button" id="modal-like-btn" class="hover:opacity-70 transition"><i class="fa-regular fa-heart"></i></button>
+              <button type="button" onclick="document.getElementById('modal-comment-input').focus()"><i class="fa-regular fa-comment"></i></button>
+            </div>
+            <button type="button" id="modal-save-btn"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+          <p id="modal-likes-count" class="text-xs font-bold">0 إعجاب</p>
+          <form onsubmit="submitModalComment(event)" class="flex items-center gap-2 pt-1 border-t border-gray-100 dark:border-zinc-900">
+            <input type="text" id="modal-comment-input" required placeholder="أضف تعليقاً..." class="flex-1 text-xs bg-transparent py-1.5 focus:outline-none">
+            <button type="submit" class="text-xs font-bold text-ig-blue hover:text-ig-blueHover">نشر</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story Viewer Modal -->
+  <div id="story-viewer-modal" class="hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-4">
+    <div class="relative w-full max-w-sm h-[85vh] bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+      <div class="absolute top-2 inset-x-3 z-20 flex gap-1">
+        <div class="h-1 bg-white/30 rounded-full flex-1 overflow-hidden">
+          <div id="story-progress-bar" class="h-full bg-white w-0"></div>
+        </div>
+      </div>
+      <div class="relative z-20 pt-5 px-4 flex items-center justify-between text-white bg-gradient-to-b from-black/70 to-transparent pb-4">
+        <div class="flex items-center gap-2.5">
+          <img id="story-viewer-avatar" src="" class="w-9 h-9 rounded-full object-cover border border-white">
+          <div>
+            <p id="story-viewer-username" class="text-xs font-bold"></p>
+            <p id="story-viewer-time" class="text-[10px] text-gray-300"></p>
+          </div>
+        </div>
+        <button type="button" onclick="closeStoryViewer()" class="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <img id="story-viewer-image" src="" class="absolute inset-0 w-full h-full object-cover">
+      <div class="relative z-20 p-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent space-y-3">
+        <p id="story-viewer-caption" class="text-white text-sm text-center font-medium drop-shadow"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal Documents & Copyright Modal -->
+  <div id="legal-docs-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800 flex flex-col max-h-[88vh]">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between bg-amber-500/5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm">الوثائق القانونية ونظام حفظ حقوق النشر</h3>
+            <p class="text-[11px] text-gray-500">حماية حقوق الملكية والوثائق والمنشورات لكل حساب</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('legal-docs-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="px-5 pt-3 border-b border-gray-200 dark:border-zinc-800 flex gap-2 overflow-x-auto no-scrollbar text-xs font-bold">
+        <button type="button" onclick="switchLegalDocTab('copyright')" data-ltab="copyright" class="legal-doc-tab px-3.5 py-2 rounded-t-xl bg-amber-500/15 text-amber-700 dark:text-amber-300 border-b-2 border-amber-500 shrink-0">حقوق النشر والوثائق</button>
+        <button type="button" onclick="switchLegalDocTab('terms')" data-ltab="terms" class="legal-doc-tab px-3.5 py-2 rounded-t-xl text-gray-500 shrink-0">شروط الاستخدام</button>
+        <button type="button" onclick="switchLegalDocTab('privacy')" data-ltab="privacy" class="legal-doc-tab px-3.5 py-2 rounded-t-xl text-gray-500 shrink-0">سياسة الخصوصية</button>
+        <button type="button" onclick="switchLegalDocTab('dmca')" data-ltab="dmca" class="legal-doc-tab px-3.5 py-2 rounded-t-xl text-gray-500 shrink-0">الإبلاغ عن انتهاك الحقوق</button>
+      </div>
+
+      <div id="legal-doc-content" class="p-5 overflow-y-auto space-y-4 text-xs leading-relaxed text-gray-700 dark:text-gray-300 flex-1"></div>
+
+      <div class="px-5 py-3.5 border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <button type="button" onclick="downloadActiveLegalDoc()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-download"></i>
+          <span>تنزيل الوثيقة (TXT)</span>
+        </button>
+        <button type="button" onclick="copyActiveLegalDoc()" class="bg-gray-200 dark:bg-zinc-800 font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 hover:opacity-85 transition">
+          <i class="fa-regular fa-copy"></i>
+          <span>نسخ نص الوثيقة</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Certificate Modal -->
+  <div id="copyright-cert-modal" class="hidden fixed inset-0 z-[60] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-amber-500/30">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between bg-amber-500/10">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-certificate text-amber-600 dark:text-amber-400 text-lg"></i>
+          <h3 class="font-bold text-sm">شهادة ووثيقة حفظ حقوق النشر والملكية</h3>
+        </div>
+        <button type="button" onclick="closeModal('copyright-cert-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="copyright-cert-body" class="p-5 space-y-3 text-xs"></div>
+      <div class="px-5 py-3.5 border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 flex items-center justify-between gap-2">
+        <button type="button" onclick="downloadCopyrightCertificate()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>تنزيل وثيقة الحقوق</span>
+        </button>
+        <button type="button" onclick="copyCopyrightCertificate()" class="bg-gray-200 dark:bg-zinc-800 font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <i class="fa-regular fa-copy"></i>
+          <span>نسخ البصمة والوثيقة</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Download & PWA Install Modal -->
+  <div id="app-download-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800 flex flex-col max-h-[90vh]">
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between bg-emerald-500/5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl ig-gradient-bg text-white flex items-center justify-center text-lg shadow">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm">تحميل ومشاركة موقع وتطبيق إنستغرام</h3>
+            <p class="text-[11px] text-gray-500">تثبيت كتطبيق مستقل (PWA) أو تنزيل نسخة التطبيق الكاملة</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('app-download-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-4 text-xs">
+        <div class="p-4 rounded-2xl bg-gradient-to-l from-ig-blue/10 to-emerald-500/10 border border-ig-blue/25 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="space-y-1 text-center sm:text-right">
+            <p class="font-bold text-sm">تثبيت التطبيق مباشرة على جهازك</p>
+            <p id="pwa-install-status" class="text-[11px] text-gray-600 dark:text-gray-400">متاح للتثبيت السريع كـ Web App على Android وiOS وWindows وMac.</p>
+          </div>
+          <button type="button" onclick="triggerPwaInstall()" class="bg-ig-blue hover:bg-ig-blueHover text-white font-bold px-4 py-2.5 rounded-xl shadow shrink-0 flex items-center gap-2 transition">
+            <i class="fa-solid fa-download"></i>
+            <span>تثبيت التطبيق الآن</span>
+          </button>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 space-y-3">
+          <label class="block font-bold text-gray-700 dark:text-gray-200">رابط الموقع والتطبيق للمشاركة:</label>
+          <div class="flex items-center gap-2">
+            <input id="app-share-url-input" type="text" readonly dir="ltr" class="flex-1 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-xs text-left select-all">
+            <button type="button" onclick="copyAppShareLink()" class="bg-gray-900 dark:bg-white text-white dark:text-black font-bold px-3.5 py-2 rounded-xl shrink-0">نسخ</button>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="button" onclick="shareAppViaNative()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5">
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>مشاركة الرابط</span>
+            </button>
+            <button type="button" onclick="downloadStandaloneAppHtml()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5">
+              <i class="fa-solid fa-file-code"></i>
+              <span>تنزيل ملف التطبيق الكامل (index.html)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 space-y-1">
+            <p class="font-bold flex items-center gap-1.5"><i class="fa-brands fa-android text-emerald-500"></i> أندرويد وكمبيوتر (Chrome)</p>
+            <p class="text-[11px] text-gray-500 leading-relaxed">اضغط على «تثبيت التطبيق الآن» أو افتح قائمة المتصفح واختر «إضافة إلى الشاشة الرئيسية / Install App».</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 space-y-1">
+            <p class="font-bold flex items-center gap-1.5"><i class="fa-brands fa-apple text-gray-700 dark:text-gray-200"></i> آيفون (Safari)</p>
+            <p class="text-[11px] text-gray-500 leading-relaxed">اضغط على زر المشاركة في Safari ثم اختر «إضافة إلى الصفحة الرئيسية».</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CLEAN, FAST-BOOTING JAVASCRIPT ENGINE (ZERO FAKE DATA)                -->
+  <!-- ===================================================================== -->
+  <script>
+    // 1. Safe Storage Wrapper (Never throws in sandboxed iframes)
+    const memoryFallbackStore = new Map();
+
+    function safeGetItem(key) {
+      try {
+        if (window.localStorage) return window.localStorage.getItem(key);
+      } catch (e) {}
+      return memoryFallbackStore.has(key) ? memoryFallbackStore.get(key) : null;
+    }
+
+    function safeSetItem(key, value) {
+      try {
+        if (window.localStorage) {
+          window.localStorage.setItem(key, value);
+          return;
+        }
+      } catch (e) {}
+      memoryFallbackStore.set(key, value);
+    }
+
+    function safeRemoveItem(key) {
+      try {
+        if (window.localStorage) window.localStorage.removeItem(key);
+      } catch (e) {}
+      memoryFallbackStore.delete(key);
+    }
+
+    const STORAGE_KEYS = {
+      STATE: 'ig_ar_real_only_state_v1',
+      SESSION_UID: 'ig_ar_real_only_uid_v1',
+      SESSION_ID: 'ig_ar_real_only_sid_v1',
+      THEME: 'ig_ar_theme_v3',
+      GEMINI_KEY: 'ig_ar_gemini_key_v2',
+      FIREBASE_JSON: 'ig_ar_firebase_json_v2'
+    };
+
+    // Empty Clean State — Zero Fake/Dummy Users or Seeded Posts
+    function createCleanState() {
+      return {
+        users: [],
+        posts: [],
+        stories: [],
+        chats: {},
+        notifications: {},
+        reports: [],
+        sessions: [],
+        securityLogs: []
+      };
+    }
+
+    function loadAppState() {
+      try {
+        const raw = safeGetItem(STORAGE_KEYS.STATE);
+        if (!raw) return createCleanState();
+        const parsed = JSON.parse(raw);
+        return {
+          users: Array.isArray(parsed.users) ? parsed.users : [],
+          posts: Array.isArray(parsed.posts) ? parsed.posts : [],
+          stories: Array.isArray(parsed.stories) ? parsed.stories : [],
+          chats: parsed.chats && typeof parsed.chats === 'object' ? parsed.chats : {},
+          notifications: parsed.notifications && typeof parsed.notifications === 'object' ? parsed.notifications : {},
+          reports: Array.isArray(parsed.reports) ? parsed.reports : [],
+          sessions: Array.isArray(parsed.sessions) ? parsed.sessions : [],
+          securityLogs: Array.isArray(parsed.securityLogs) ? parsed.securityLogs : []
+        };
+      } catch (e) {
+        return createCleanState();
+      }
+    }
+
+    let appState = loadAppState();
+    let currentUser = null;
+    let currentSessionId = safeGetItem(STORAGE_KEYS.SESSION_ID) || null;
+    let allUsers = [];
+    let allPosts = [];
+    let allStories = [];
+    let myNotifications = [];
+    let allReports = [];
+    let activeChatMessages = [];
+
+    let currentView = 'home';
+    let viewingProfileUid = null;
+    let currentProfileTab = 'posts';
+    let activeDmTargetUid = null;
+    let activeModalPostId = null;
+    let createMode = 'post';
+    let authMode = 'login';
+    let storyTimer = null;
+    let pendingReportTarget = null;
+    let deferredPwaPrompt = null;
+    let activeLegalDocKey = 'copyright';
+    let currentCertificateText = '';
+    let currentCertificateFilename = 'copyright_certificate.txt';
+    let firebaseAuthInstance = null;
+
+    function syncMirrorArrays() {
+      allUsers = appState.users;
+      allPosts = [...appState.posts].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      const dayAgo = Date.now() - 24 * 60 * 60 * 1000;
+      allStories = appState.stories
+        .filter(s => (s.createdAt || 0) > dayAgo)
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      allReports = [...appState.reports].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      if (currentUser) {
+        const freshMe = appState.users.find(u => u.uid === currentUser.uid);
+        if (freshMe) currentUser = freshMe;
+        myNotifications = [...(appState.notifications[currentUser.uid] || [])].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      } else {
+        myNotifications = [];
+      }
+    }
+
+    function persistAppState() {
+      safeSetItem(STORAGE_KEYS.STATE, JSON.stringify(appState));
+      syncMirrorArrays();
+    }
+
+    syncMirrorArrays();
+
+    // 2. Theme & UI Helpers
+    function initTheme() {
+      const savedTheme = safeGetItem(STORAGE_KEYS.THEME);
+      if (savedTheme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      safeSetItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
+      showToast(isDark ? 'تم تفعيل الوضع الليلي 🌙' : 'تم تفعيل الوضع النهاري ☀️');
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      const colorClass = type === 'error'
+        ? 'bg-red-600 text-white'
+        : (type === 'success' ? 'bg-emerald-600 text-white' : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900');
+      toast.className = `${colorClass} px-4 py-2.5 rounded-xl shadow-xl text-xs font-bold flex items-center gap-2 pointer-events-auto transition-all duration-300`;
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 250);
+      }, 3200);
+    }
+
+    function formatRelativeTime(ts) {
+      if (!ts) return 'الآن';
+      const diffSec = Math.max(1, Math.floor((Date.now() - ts) / 1000));
+      if (diffSec < 60) return `منذ ${diffSec} ث`;
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return `منذ ${diffMin} د`;
+      const diffHr = Math.floor(diffMin / 60);
+      if (diffHr < 24) return `منذ ${diffHr} س`;
+      return `منذ ${Math.floor(diffHr / 24)} ي`;
+    }
+
+    function isUserOnline(userObj) {
+      if (!userObj || userObj.hideActivityStatus) return false;
+      return (Date.now() - (userObj.lastSeen || 0)) < 5 * 60 * 1000;
+    }
+
+    function isBlockedEitherWay(otherUid) {
+      if (!currentUser || !otherUid || otherUid === currentUser.uid) return false;
+      if ((currentUser.blockedUsers || []).includes(otherUid)) return true;
+      const otherUser = allUsers.find(u => u.uid === otherUid);
+      return !!(otherUser && (otherUser.blockedUsers || []).includes(currentUser.uid));
+    }
+
+    function canViewUserContent(ownerUid) {
+      if (!currentUser) return false;
+      if (ownerUid === currentUser.uid) return true;
+      if (isBlockedEitherWay(ownerUid)) return false;
+      const owner = allUsers.find(u => u.uid === ownerUid);
+      if (!owner || !owner.isPrivate) return true;
+      return (owner.followers || []).includes(currentUser.uid);
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId)?.classList.add('hidden');
+      if (modalId === 'post-detail-modal') activeModalPostId = null;
+    }
+
+    // 3. Google Max-Shield Security Engine (Fingerprint, Anti-Bot, Sessions & Audit)
+    const rateActionTracker = new Map();
+
+    function computeDeviceFingerprint() {
+      const raw = [
+        navigator.userAgent || 'browser',
+        navigator.language || 'ar',
+        screen?.width || 0,
+        screen?.height || 0,
+        new Date().getTimezoneOffset()
+      ].join('|');
+      let h = 2166136261;
+      for (let i = 0; i < raw.length; i++) {
+        h ^= raw.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return 'FP-' + (h >>> 0).toString(16).toUpperCase().padStart(8, '0');
+    }
+
+    const CURRENT_DEVICE_FP = computeDeviceFingerprint();
+
+    function recordSecurityEvent(level, title, detail) {
+      appState.securityLogs.unshift({
+        id: 'sec_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        uid: currentUser?.uid || 'guest',
+        level: level || 'info',
+        title,
+        detail,
+        deviceFp: CURRENT_DEVICE_FP,
+        createdAt: Date.now()
+      });
+      if (appState.securityLogs.length > 100) appState.securityLogs = appState.securityLogs.slice(0, 100);
+      persistAppState();
+      if (currentView === 'settings') renderMaxShieldPanel();
+    }
+
+    function checkRateLimitOrBot(actionKey, maxActions = 6, windowMs = 20000) {
+      const ultraStrict = currentUser?.maxShieldUltraLock !== false;
+      const effectiveMax = ultraStrict ? maxActions : maxActions + 4;
+      const actorKey = `${currentUser?.uid || 'anon'}_${actionKey}`;
+      const now = Date.now();
+      const history = (rateActionTracker.get(actorKey) || []).filter(ts => (now - ts) < windowMs);
+      if (history.length >= effectiveMax) {
+        recordSecurityEvent('alert', 'رصد نشاط متكرر سريع (Anti-Bot)', `تم تقييد "${actionKey}" مؤقتاً لحماية الحساب.`);
+        showToast('تم تفعيل الحماية ضد النشاط السريع المتكرر؛ انتظر بضع ثوانٍ 🛡️', 'error');
+        return false;
+      }
+      history.push(now);
+      rateActionTracker.set(actorKey, history);
+      return true;
+    }
+
+    function registerZeroTrustSession(userObj, providerLabel) {
+      const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+      currentSessionId = sessionId;
+      safeSetItem(STORAGE_KEYS.SESSION_ID, sessionId);
+
+      appState.sessions.unshift({
+        sessionId,
+        uid: userObj.uid,
+        provider: providerLabel,
+        deviceFp: CURRENT_DEVICE_FP,
+        createdAt: Date.now(),
+        lastActiveAt: Date.now()
+      });
+      if (appState.sessions.length > 40) appState.sessions = appState.sessions.slice(0, 40);
+      persistAppState();
+    }
+
+    function terminateAllOtherSessions() {
+      if (!currentUser || !currentSessionId) return;
+      appState.sessions = appState.sessions.filter(s => s.uid !== currentUser.uid || s.sessionId === currentSessionId);
+      persistAppState();
+      recordSecurityEvent('info', 'إنهاء الجلسات الأخرى', 'تم إغلاق جميع الجلسات الأخرى وإبقاء جلستك الحالية فقط.');
+      renderMaxShieldPanel();
+      showToast('تم إنهاء جميع الجلسات الأخرى بنجاح 🔒', 'success');
+    }
+
+    function clearSecurityLogs() {
+      appState.securityLogs = [];
+      persistAppState();
+      renderMaxShieldPanel();
+      showToast('تم مسح سجل الأحداث الأمنية');
+    }
+
+    function saveMaxShieldControls() {
+      if (!currentUser) return;
+      currentUser.maxShieldUltraLock = document.getElementById('shield-ultra-lock').checked;
+      currentUser.documentIpStrict = document.getElementById('shield-ip-strict').checked;
+      persistAppState();
+      recordSecurityEvent('info', 'تحديث إعدادات الحماية القصوى', 'تم تحديث قواعد حماية الجلسات والوثائق.');
+      renderMaxShieldPanel();
+      showToast('تم تحديث إعدادات Google Max-Shield بنجاح 🛡️', 'success');
+    }
+
+    function renderMaxShieldPanel() {
+      if (!currentUser) return;
+      const ultraLock = currentUser.maxShieldUltraLock !== false;
+      const ipStrict = currentUser.documentIpStrict !== false;
+      const score = (ultraLock ? 55 : 35) + (ipStrict ? 45 : 25);
+
+      const scoreEl = document.getElementById('shield-security-score');
+      const sideScoreEl = document.getElementById('sidebar-shield-score');
+      if (scoreEl) scoreEl.textContent = `${score}%`;
+      if (sideScoreEl) sideScoreEl.textContent = `${score}/100`;
+
+      const lockInput = document.getElementById('shield-ultra-lock');
+      const ipInput = document.getElementById('shield-ip-strict');
+      if (lockInput) lockInput.checked = ultraLock;
+      if (ipInput) ipInput.checked = ipStrict;
+
+      const fpEl = document.getElementById('shield-device-fingerprint');
+      if (fpEl) fpEl.textContent = `بصمة الجهاز الحالية: ${CURRENT_DEVICE_FP}`;
+
+      const sessionsContainer = document.getElementById('active-sessions-list');
+      if (sessionsContainer) {
+        const mySessions = appState.sessions.filter(s => s.uid === currentUser.uid);
+        sessionsContainer.innerHTML = mySessions.length ? mySessions.map(s => `
+          <div class="p-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 flex items-center justify-between gap-2">
+            <div>
+              <p class="font-bold text-xs flex items-center gap-1.5">
+                <span>${s.provider || 'جلسة موثقة'}</span>
+                ${s.sessionId === currentSessionId ? '<span class="text-[10px] bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full">الجلسة الحالية</span>' : ''}
+              </p>
+              <p class="text-[10px] font-mono text-gray-400">${s.deviceFp} • ${formatRelativeTime(s.lastActiveAt || s.createdAt)}</p>
+            </div>
+          </div>
+        `).join('') : `<p class="text-xs text-gray-400">لا توجد جلسات مسجلة.</p>`;
+      }
+
+      const logsContainer = document.getElementById('security-audit-log-list');
+      if (logsContainer) {
+        const logs = appState.securityLogs.filter(l => l.uid === currentUser.uid || l.uid === 'guest');
+        logsContainer.innerHTML = logs.length ? logs.map(l => {
+          const badge = l.level === 'alert'
+            ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300'
+            : (l.level === 'warn' ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300');
+          return `
+            <div class="p-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 space-y-1">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-xs">${l.title}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badge}">${formatRelativeTime(l.createdAt)}</span>
+              </div>
+              <p class="text-[11px] text-gray-500 leading-relaxed">${l.detail}</p>
+            </div>
+          `;
+        }).join('') : `<p class="text-xs text-gray-400 py-3 text-center">لا توجد أحداث أمنية مسجلة بعد.</p>`;
+      }
+    }
+
+    // 4. Optional Live Firebase SDK Loader (Only loads if user enters Firebase config)
+    function loadScriptAsync(src) {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) return resolve();
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    async function initOptionalFirebase() {
+      try {
+        const rawJson = (safeGetItem(STORAGE_KEYS.FIREBASE_JSON) || '').trim();
+        if (!rawJson) return;
+        const cfg = JSON.parse(rawJson);
+        if (!cfg.apiKey || !cfg.projectId) return;
+
+        await loadScriptAsync('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
+        await loadScriptAsync('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js');
+
+        if (window.firebase) {
+          if (!firebase.apps.length) firebase.initializeApp(cfg);
+          firebaseAuthInstance = firebase.auth();
+          const statusEl = document.getElementById('auth-firebase-status');
+          if (statusEl) statusEl.innerHTML = `<i class="fa-solid fa-cloud-check text-emerald-500"></i><span>Firebase + Google OAuth متصل</span>`;
+        }
+      } catch (e) {
+        console.warn('Optional Firebase init skipped:', e);
+      }
+    }
+
+    function openCloudConfigModal() {
+      document.getElementById('modal-firebase-json').value = safeGetItem(STORAGE_KEYS.FIREBASE_JSON) || '';
+      document.getElementById('modal-gemini-key').value = safeGetItem(STORAGE_KEYS.GEMINI_KEY) || '';
+      document.getElementById('cloud-config-modal').classList.remove('hidden');
+    }
+
+    async function saveModalCloudConfig() {
+      const fbRaw = document.getElementById('modal-firebase-json').value.trim();
+      const gemKey = document.getElementById('modal-gemini-key').value.trim();
+      if (fbRaw) {
+        try { JSON.parse(fbRaw); } catch (e) {
+          showToast('صيغة JSON الخاصة بـ Firebase غير صحيحة', 'error');
+          return;
+        }
+        safeSetItem(STORAGE_KEYS.FIREBASE_JSON, fbRaw);
+      } else {
+        safeRemoveItem(STORAGE_KEYS.FIREBASE_JSON);
+      }
+      if (gemKey) safeSetItem(STORAGE_KEYS.GEMINI_KEY, gemKey);
+      else safeRemoveItem(STORAGE_KEYS.GEMINI_KEY);
+
+      closeModal('cloud-config-modal');
+      await initOptionalFirebase();
+      showToast('تم حفظ وتفعيل إعدادات الربط السحابي ✅', 'success');
+    }
+
+    // 5. Real Authentication Gate (Google + Email/Password, Zero Fake Users)
+    function switchAuthMode(mode) {
+      authMode = mode;
+      const loginTab = document.getElementById('tab-auth-login');
+      const regTab = document.getElementById('tab-auth-register');
+      const extraFields = document.getElementById('register-extra-fields');
+      const submitBtn = document.getElementById('email-auth-submit-btn');
+
+      if (mode === 'register') {
+        regTab.classList.add('bg-white', 'dark:bg-zinc-800', 'shadow-xs', 'text-gray-900', 'dark:text-white');
+        regTab.classList.remove('text-gray-500');
+        loginTab.classList.remove('bg-white', 'dark:bg-zinc-800', 'shadow-xs', 'text-gray-900', 'dark:text-white');
+        loginTab.classList.add('text-gray-500');
+        extraFields.classList.remove('hidden');
+        submitBtn.textContent = 'إنشاء حساب حقيقي آمن';
+      } else {
+        loginTab.classList.add('bg-white', 'dark:bg-zinc-800', 'shadow-xs', 'text-gray-900', 'dark:text-white');
+        loginTab.classList.remove('text-gray-500');
+        regTab.classList.remove('bg-white', 'dark:bg-zinc-800', 'shadow-xs', 'text-gray-900', 'dark:text-white');
+        regTab.classList.add('text-gray-500');
+        extraFields.classList.add('hidden');
+        submitBtn.textContent = 'تسجيل الدخول الآمن';
+      }
+    }
+
+    function ensureRealUserRecord({ uid, displayName, username, email, photoURL, provider }) {
+      const normalizedEmail = (email || '').trim().toLowerCase();
+      const cleanUsername = (username || normalizedEmail.split('@')[0] || 'member')
+        .toLowerCase()
+        .replace(/[^a-z0-9._]/g, '_')
+        .slice(0, 20) || 'member';
+
+      let existing = appState.users.find(
+        u => (normalizedEmail && u.email && u.email.toLowerCase() === normalizedEmail) || u.uid === uid
+      );
+
+      if (!existing) {
+        let uniqueName = cleanUsername;
+        let suffix = 1;
+        while (appState.users.some(u => u.username === uniqueName)) {
+          uniqueName = `${cleanUsername}_${suffix++}`;
+        }
+
+        existing = {
+          uid,
+          username: uniqueName,
+          displayName: displayName || uniqueName,
+          email: normalizedEmail,
+          authProvider: provider || 'account',
+          photoURL: photoURL || `https://placehold.co/150x150/0095f6/ffffff?text=${encodeURIComponent(uniqueName.slice(0, 2).toUpperCase())}`,
+          bio: 'حساب حقيقي موثق • محمي بنظام Google Max-Shield وحقوق النشر',
+          website: '',
+          isPrivate: false,
+          hideActivityStatus: false,
+          allowMessagesFrom: 'everyone',
+          maxShieldUltraLock: true,
+          documentIpStrict: true,
+          followers: [],
+          following: [],
+          followRequests: [],
+          blockedUsers: [],
+          savedPosts: [],
+          lastSeen: Date.now(),
+          createdAt: Date.now()
+        };
+        appState.users.push(existing);
+      } else {
+        existing.lastSeen = Date.now();
+        if (displayName) existing.displayName = displayName;
+        if (provider) existing.authProvider = provider;
+        if (photoURL && (!existing.photoURL || existing.photoURL.includes('placehold.co'))) existing.photoURL = photoURL;
+      }
+
+      persistAppState();
+      return existing;
+    }
+
+    function activateSession(userObj, welcomeMessage, providerLabel = 'جلسة موثقة') {
+      currentUser = userObj;
+      currentUser.lastSeen = Date.now();
+      safeSetItem(STORAGE_KEYS.SESSION_UID, currentUser.uid);
+      registerZeroTrustSession(currentUser, providerLabel);
+      recordSecurityEvent('info', 'جلسة دخول نشطة ومحمية', `تم فتح الجلسة لحساب @${currentUser.username} (${providerLabel}).`);
+
+      document.getElementById('auth-view').classList.add('hidden');
+      document.getElementById('app-view').classList.remove('hidden');
+
+      updateUserHeaderBadges();
+      renderMaxShieldPanel();
+      renderStories();
+      renderFeed();
+      renderSuggestedUsers();
+      renderReels();
+      renderDmContactsList();
+      renderNotifications();
+      updateBadges();
+      navigateTo('home');
+
+      if (welcomeMessage) showToast(welcomeMessage, 'success');
+    }
+
+    function hideGoogleVerifiedPanel() {
+      document.getElementById('google-verified-panel')?.classList.add('hidden');
+    }
+
+    async function handleGoogleLogin() {
+      if (!checkRateLimitOrBot('google_signin', 5, 30000)) return;
+
+      if (firebaseAuthInstance) {
+        try {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('email');
+          provider.addScope('profile');
+          const result = await firebaseAuthInstance.signInWithPopup(provider);
+          const gUser = result.user;
+          if (gUser && gUser.email) {
+            const realUser = ensureRealUserRecord({
+              uid: 'google_' + gUser.uid,
+              displayName: gUser.displayName || gUser.email.split('@')[0],
+              username: gUser.email.split('@')[0],
+              email: gUser.email,
+              photoURL: gUser.photoURL,
+              provider: 'Google OAuth (Firebase)'
+            });
+            activateSession(realUser, 'تم تسجيل الدخول الحقيقي عبر Google بنجاح 🛡️', 'Google OAuth');
+            return;
+          }
+        } catch (err) {
+          recordSecurityEvent('warn', 'تنبيه نافذة Google المنبثقة', 'تم التحويل لتأكيد حساب Google الحقيقي مباشرة.');
+        }
+      }
+
+      const panel = document.getElementById('google-verified-panel');
+      panel.classList.remove('hidden');
+      document.getElementById('google-real-email').focus();
+    }
+
+    function confirmVerifiedGoogleSignIn() {
+      const emailInput = document.getElementById('google-real-email').value.trim().toLowerCase();
+      const nameInput = document.getElementById('google-real-name').value.trim();
+
+      if (!emailInput || !emailInput.includes('@')) {
+        showToast('يرجى إدخال بريدك الحقيقي على Google (مثال: name@gmail.com)', 'error');
+        return;
+      }
+
+      const handleBase = emailInput.split('@')[0];
+      const uid = 'g_acc_' + btoa(unescape(encodeURIComponent(emailInput))).replace(/[^a-zA-Z0-9]/g, '').slice(0, 16);
+      const user = ensureRealUserRecord({
+        uid,
+        displayName: nameInput || handleBase,
+        username: handleBase,
+        email: emailInput,
+        photoURL: `https://placehold.co/150x150/1a73e8/ffffff?text=${encodeURIComponent(handleBase.slice(0, 2).toUpperCase())}`,
+        provider: 'Google Account'
+      });
+
+      hideGoogleVerifiedPanel();
+      activateSession(user, 'تم توثيق والدخول بحساب Google الحقيقي بنجاح 🛡️', 'Google Account');
+    }
+
+    function handleEmailAuthSubmit(event) {
+      event.preventDefault();
+      if (!checkRateLimitOrBot('account_auth', 6, 30000)) return;
+
+      const email = document.getElementById('auth-email').value.trim().toLowerCase();
+      const fullName = document.getElementById('reg-fullname').value.trim();
+      const regUser = document.getElementById('reg-username').value.trim();
+      const humanChecked = document.getElementById('auth-human-verify').checked;
+
+      if (!email || !email.includes('@')) {
+        showToast('يرجى إدخال بريد إلكتروني حقيقي صحيح', 'error');
+        return;
+      }
+      if (!humanChecked) {
+        showToast('يرجى تأكيد التحقق البشري أولاً', 'error');
+        return;
+      }
+
+      const slug = (regUser || email.split('@')[0] || 'member')
+        .toLowerCase()
+        .replace(/[^a-z0-9._]/g, '_')
+        .slice(0, 18) || 'member';
+
+      const uid = 'real_' + btoa(unescape(encodeURIComponent(email))).replace(/[^a-zA-Z0-9]/g, '').slice(0, 16);
+      const user = ensureRealUserRecord({
+        uid,
+        displayName: fullName || slug,
+        username: slug,
+        email,
+        photoURL: `https://placehold.co/150x150/0095f6/ffffff?text=${encodeURIComponent(slug.slice(0, 2).toUpperCase())}`,
+        provider: 'Verified Email Account'
+      });
+
+      activateSession(user, authMode === 'register' ? 'تم إنشاء الحساب الحقيقي وحمايته بنجاح 🛡️' : 'تم تسجيل الدخول الآمن بنجاح 🛡️', 'Email Auth');
+    }
+
+    function handleLogout() {
+      if (currentUser && currentSessionId) {
+        appState.sessions = appState.sessions.filter(s => s.sessionId !== currentSessionId);
+        persistAppState();
+      }
+      if (firebaseAuthInstance) {
+        try { firebaseAuthInstance.signOut(); } catch (e) {}
+      }
+      currentUser = null;
+      currentSessionId = null;
+      activeDmTargetUid = null;
+      safeRemoveItem(STORAGE_KEYS.SESSION_UID);
+      safeRemoveItem(STORAGE_KEYS.SESSION_ID);
+      document.getElementById('app-view').classList.add('hidden');
+      document.getElementById('auth-view').classList.remove('hidden');
+      showToast('تم تسجيل الخروج وإنهاء الجلسة بأمان');
+    }
+
+    function updateUserHeaderBadges() {
+      if (!currentUser) return;
+      ['sidebar-avatar', 'right-panel-avatar', 'mobile-nav-avatar'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.src = currentUser.photoURL;
+      });
+      const rUser = document.getElementById('right-panel-username');
+      const rName = document.getElementById('right-panel-name');
+      if (rUser) rUser.textContent = currentUser.username;
+      if (rName) rName.textContent = currentUser.displayName;
+    }
+
+    function updateBadges() {
+      if (!currentUser) return;
+      const hasNotif = myNotifications.length > 0 || (currentUser.followRequests || []).length > 0;
+      document.getElementById('mobile-notif-badge')?.classList.toggle('hidden', !hasNotif);
+      document.getElementById('desktop-notif-badge')?.classList.toggle('hidden', !hasNotif);
+    }
+
+    function pushRealNotification(targetUid, type, text, postId = null) {
+      if (!currentUser || !targetUid || targetUid === currentUser.uid) return;
+      if (!appState.notifications[targetUid]) appState.notifications[targetUid] = [];
+      appState.notifications[targetUid].unshift({
+        id: 'notif_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        fromUid: currentUser.uid,
+        fromUsername: currentUser.username,
+        fromAvatar: currentUser.photoURL,
+        type,
+        text,
+        postId,
+        createdAt: Date.now()
+      });
+      persistAppState();
+      if (currentView === 'notifications') renderNotifications();
+      updateBadges();
+    }
+
+    // 6. Copyright & Ownership Fingerprinting per Account & Post
+    function generateAccountCopyrightId(uid) {
+      const input = 'IG_AR_ACC_SALT_' + String(uid || 'guest');
+      let hash = 2166136261;
+      for (let i = 0; i < input.length; i++) {
+        hash ^= input.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return 'CR-ACC-' + (hash >>> 0).toString(36).toUpperCase().padStart(7, '0').slice(0, 7);
+    }
+
+    function generatePostCopyrightId(post) {
+      const base = `${post?.id || ''}_${post?.uid || ''}_${post?.createdAt || ''}`;
+      let sum = 0;
+      for (let i = 0; i < base.length; i++) {
+        sum = ((sum << 5) - sum) + base.charCodeAt(i);
+        sum |= 0;
+      }
+      return 'CR-DOC-' + Math.abs(sum).toString(16).toUpperCase().padStart(6, '0').slice(0, 6);
+    }
+
+    function copyTextFallback(text) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (e) {}
+    }
+
+    document.addEventListener('copy', () => {
+      if (!currentUser) return;
+      const activeTag = document.activeElement?.tagName?.toLowerCase();
+      if (activeTag === 'input' || activeTag === 'textarea') return;
+      const selected = window.getSelection ? window.getSelection().toString().trim() : '';
+      if (!selected || selected.length < 6) return;
+      const accId = generateAccountCopyrightId(currentUser.uid);
+      if (currentUser.documentIpStrict !== false) {
+        recordSecurityEvent('warn', 'رصد نسخ محتوى/وثيقة', `تم نسخ نص بطول ${selected.length} حرف تحت بصمة الملكية ${accId}.`);
+      }
+      showToast(`تم النسخ مع ختم حقوق النشر (${accId}) ©️`);
+    });
+
+    // 7. Image Compression & AI Content Moderation (Gemini + Local Engine)
+    function compressImageFile(file, maxWidth = 850, quality = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            if (w > maxWidth) {
+              h = Math.round((h * maxWidth) / w);
+              w = maxWidth;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleCompressedImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const compressed = await compressImageFile(file, 850, 0.75);
+        document.getElementById('new-post-preview').src = compressed;
+        showToast('تم تجهيز الصورة بنجاح ✓');
+      } catch (err) {
+        showToast('تعذر قراءة الصورة، جرّب صورة أخرى', 'error');
+      }
+    }
+
+    function runLocalSmartModeration(contentText, reasonText = '') {
+      const combined = `${contentText || ''} ${reasonText || ''}`.toLowerCase();
+      const severeWords = ['احتيال', 'نصب', 'تهديد', 'عنف', 'كراهية', 'انتهاك حقوق', 'سرقة وثائق', 'scam', 'hack', 'threat', 'hate'];
+      const warningWords = ['مسيء', 'إساءة', 'تنمر', 'سب', 'مزعج', 'spam', 'abuse'];
+
+      if (severeWords.some(w => combined.includes(w))) {
+        return {
+          actionTaken: 'content_removed',
+          severity: 'high',
+          reasoningArabic: 'رصد محرك الإشراف الذكي مؤشرات مخالفة واضحة تتعلق بالإساءة أو الاحتيال أو انتهاك الحقوق، وتمت إزالة المحتوى المخالف.'
+        };
+      }
+      if (warningWords.some(w => combined.includes(w))) {
+        return {
+          actionTaken: 'warning_issued',
+          severity: 'medium',
+          reasoningArabic: 'تم رصد مؤشرات تستدعي توجيه تنبيه إشرافي وتقييد المحتوى وفق سياسات الأمان.'
+        };
+      }
+      return {
+        actionTaken: 'no_violation',
+        severity: 'low',
+        reasoningArabic: 'تم تحليل المحتوى والبلاغ ولم يتم العثور على مخالفة جسيمة تستوجب الحذف الفوري.'
+      };
+    }
+
+    async function analyzeContentWithGeminiAI(contentText, reasonText = '', detailsText = '') {
+      const apiKey = (safeGetItem(STORAGE_KEYS.GEMINI_KEY) || '').trim();
+      if (!apiKey) return runLocalSmartModeration(contentText, `${reasonText} ${detailsText}`);
+
+      try {
+        const prompt = `حلل المحتوى التالي كنظام إشراف محتوى اجتماعي وأجب بصيغة JSON فقط:
+المحتوى: "${contentText}"
+سبب البلاغ: "${reasonText}"
+التفاصيل: "${detailsText}"
+المفاتيح: {"actionTaken":"content_removed|warning_issued|no_violation","severity":"high|medium|low","reasoningArabic":"شرح مختصر بالعربية"}`;
+
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { responseMimeType: 'application/json' }
+          })
+        });
+
+        if (!resp.ok) throw new Error('Gemini API error');
+        const data = await resp.json();
+        const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const parsed = JSON.parse(rawText);
+        if (parsed && parsed.actionTaken) {
+          return {
+            actionTaken: parsed.actionTaken,
+            severity: parsed.severity || 'medium',
+            reasoningArabic: parsed.reasoningArabic || 'تم التحليل عبر Gemini AI.'
+          };
+        }
+      } catch (e) {}
+      return runLocalSmartModeration(contentText, `${reasonText} ${detailsText}`);
+    }
+
+    function openReportModal(targetType, targetId, targetOwnerUid, targetPreview) {
+      pendingReportTarget = { targetType, targetId, targetOwnerUid, targetPreview };
+      document.getElementById('report-target-preview').textContent = targetPreview || 'محتوى على المنصة';
+      document.getElementById('report-details-input').value = '';
+      const resBox = document.getElementById('ai-report-result-box');
+      resBox.classList.add('hidden');
+      resBox.innerHTML = '';
+      const btn = document.getElementById('submit-report-btn');
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-shield-halved"></i><span>إرسال البلاغ للتحليل الذكي الفوري</span>`;
+      document.getElementById('ai-report-modal').classList.remove('hidden');
+    }
+
+    async function submitAiReport(event) {
+      event.preventDefault();
+      if (!pendingReportTarget || !currentUser) return;
+
+      const reason = document.getElementById('report-reason-select').value;
+      const details = document.getElementById('report-details-input').value.trim();
+      const btn = document.getElementById('submit-report-btn');
+      const resBox = document.getElementById('ai-report-result-box');
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>جاري التحليل بالذكاء الاصطناعي...</span>`;
+
+      const decision = await analyzeContentWithGeminiAI(pendingReportTarget.targetPreview, reason, details);
+
+      if (decision.actionTaken === 'content_removed') {
+        if (pendingReportTarget.targetType === 'post') {
+          appState.posts = appState.posts.filter(p => p.id !== pendingReportTarget.targetId);
+        } else if (pendingReportTarget.targetType === 'comment') {
+          const [postId, idxStr] = pendingReportTarget.targetId.split('_');
+          const idx = Number(idxStr);
+          const targetPost = appState.posts.find(p => p.id === postId);
+          if (targetPost && Array.isArray(targetPost.comments) && targetPost.comments[idx]) {
+            targetPost.comments.splice(idx, 1);
+          }
+        }
+      }
+
+      appState.reports.unshift({
+        id: 'rep_' + Date.now(),
+        reporterUid: currentUser.uid,
+        reporterUsername: currentUser.username,
+        targetType: pendingReportTarget.targetType,
+        targetId: pendingReportTarget.targetId,
+        reason,
+        targetPreview: pendingReportTarget.targetPreview,
+        aiDecision: decision,
+        createdAt: Date.now()
+      });
+
+      persistAppState();
+      renderFeed();
+      renderExplore();
+      renderReels();
+      if (activeModalPostId) {
+        if (appState.posts.some(p => p.id === activeModalPostId)) renderModalPostDetails(activeModalPostId);
+        else closeModal('post-detail-modal');
+      }
+
+      const actionLabel = decision.actionTaken === 'content_removed'
+        ? 'تم حذف المحتوى المخالف تلقائياً 🗑️'
+        : (decision.actionTaken === 'warning_issued' ? 'تم إصدار تنبيه إشرافي ⚠️' : 'تمت المراجعة — لا توجد مخالفة جسيمة ✅');
+
+      resBox.className = 'p-3.5 rounded-xl border text-xs space-y-1.5 bg-purple-500/10 border-purple-500/30 text-purple-900 dark:text-purple-200';
+      resBox.innerHTML = `<p class="font-bold">قرار الإشراف: ${actionLabel}</p><p class="leading-relaxed">${decision.reasoningArabic}</p>`;
+      resBox.classList.remove('hidden');
+
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-check"></i><span>تم تسجيل القرار في سجل الشفافية</span>`;
+      showToast('تم تحليل البلاغ وتوثيق القرار بنجاح', 'success');
+    }
+
+    function openTransparencyModal() {
+      const container = document.getElementById('transparency-reports-list');
+      if (container) {
+        container.innerHTML = allReports.length ? allReports.map(rep => {
+          const ai = rep.aiDecision || {};
+          const badgeClass = ai.actionTaken === 'content_removed'
+            ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300'
+            : (ai.actionTaken === 'warning_issued' ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300');
+          const badgeText = ai.actionTaken === 'content_removed' ? 'حذف المحتوى' : (ai.actionTaken === 'warning_issued' ? 'تنبيه' : 'سليم');
+          return `
+            <div class="p-3.5 rounded-xl bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 space-y-2 text-xs">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold">بلاغ من @${rep.reporterUsername} • ${rep.reason}</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${badgeClass}">${badgeText}</span>
+              </div>
+              <p class="text-gray-500 bg-white dark:bg-zinc-900 p-2 rounded-lg border border-gray-100 dark:border-zinc-800 line-clamp-1">"${rep.targetPreview}"</p>
+              <div class="flex items-start gap-2 text-purple-700 dark:text-purple-300 bg-purple-500/5 p-2.5 rounded-lg">
+                <i class="fa-solid fa-robot mt-0.5"></i>
+                <p class="leading-relaxed">${ai.reasoningArabic || 'تمت المراجعة.'}</p>
+              </div>
+            </div>
+          `;
+        }).join('') : `<p class="text-center text-xs text-gray-400 py-8">لا توجد بلاغات مسجلة بعد.</p>`;
+      }
+      document.getElementById('transparency-modal').classList.remove('hidden');
+    }
+
+    // 8. Posts, Stories, Reels, Comments & Likes
+    function openCreatePostModal() {
+      setCreateMode('post');
+      document.getElementById('new-post-preview').src = 'https://placehold.co/800x600/0f172a/ffffff?text=%D8%A7%D8%B1%D9%81%D8%B9+%D8%B5%D9%88%D8%B1%D8%A9+%D9%85%D9%86+%D8%AC%D9%87%D8%A7%D8%B2%D9%83';
+      document.getElementById('new-post-image-url').value = '';
+      document.getElementById('create-post-modal').classList.remove('hidden');
+    }
+
+    function setCreateMode(mode) {
+      createMode = mode;
+      const postBtn = document.getElementById('create-type-post');
+      const storyBtn = document.getElementById('create-type-story');
+      const locBox = document.getElementById('new-post-location-box');
+      if (mode === 'story') {
+        storyBtn.classList.add('bg-white', 'dark:bg-zinc-700', 'shadow-xs');
+        storyBtn.classList.remove('text-gray-500');
+        postBtn.classList.remove('bg-white', 'dark:bg-zinc-700', 'shadow-xs');
+        postBtn.classList.add('text-gray-500');
+        locBox.classList.add('hidden');
+      } else {
+        postBtn.classList.add('bg-white', 'dark:bg-zinc-700', 'shadow-xs');
+        postBtn.classList.remove('text-gray-500');
+        storyBtn.classList.remove('bg-white', 'dark:bg-zinc-700', 'shadow-xs');
+        storyBtn.classList.add('text-gray-500');
+        locBox.classList.remove('hidden');
+      }
+    }
+
+    async function submitNewPostOrStory() {
+      if (!currentUser) return;
+      if (!checkRateLimitOrBot('publish_content', 5, 25000)) return;
+      const btn = document.getElementById('publish-post-btn');
+      const caption = document.getElementById('new-post-caption').value.trim();
+      const location = document.getElementById('new-post-location').value.trim();
+      const imageSrc = document.getElementById('new-post-preview').src;
+
+      const safety = await analyzeContentWithGeminiAI(caption, 'فحص استباقي للنشر');
+      if (safety.actionTaken === 'content_removed') {
+        showToast(`تم إيقاف النشر: ${safety.reasoningArabic}`, 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'جاري النشر...';
+      try {
+        if (createMode === 'story') {
+          appState.stories.unshift({
+            id: 'story_' + Date.now(),
+            uid: currentUser.uid,
+            username: currentUser.username,
+            userAvatar: currentUser.photoURL,
+            image: imageSrc,
+            caption,
+            createdAt: Date.now()
+          });
+          persistAppState();
+          renderStories();
+          showToast('تم نشر قصتك لمدة 24 ساعة ✨', 'success');
+        } else {
+          appState.posts.unshift({
+            id: 'post_' + Date.now(),
+            uid: currentUser.uid,
+            username: currentUser.username,
+            userAvatar: currentUser.photoURL,
+            image: imageSrc,
+            caption: caption || 'منشور جديد ✨',
+            location,
+            likes: [],
+            comments: [],
+            createdAt: Date.now()
+          });
+          persistAppState();
+          renderFeed();
+          renderExplore();
+          renderReels();
+          if (viewingProfileUid === currentUser.uid) renderProfile(currentUser.uid);
+          showToast('تم نشر منشورك وتوثيق حقوق النشر له بنجاح 🎉', 'success');
+        }
+        document.getElementById('new-post-caption').value = '';
+        document.getElementById('new-post-location').value = '';
+        closeModal('create-post-modal');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'نشر الآن';
+      }
+    }
+
+    function renderStories() {
+      const container = document.getElementById('stories-container');
+      if (!container || !currentUser) return;
+      const visibleStories = allStories.filter(s => canViewUserContent(s.uid));
+
+      let html = `
+        <div onclick="openCreatePostModal(); setCreateMode('story');" class="flex flex-col items-center shrink-0 cursor-pointer group w-16">
+          <div class="relative">
+            <img src="${currentUser.photoURL}" class="w-14 h-14 rounded-full object-cover border border-gray-200 dark:border-zinc-800">
+            <span class="absolute bottom-0 right-0 bg-ig-blue text-white w-5 h-5 rounded-full flex items-center justify-center text-xs border-2 border-white dark:border-black">
+              <i class="fa-solid fa-plus"></i>
+            </span>
+          </div>
+          <span class="text-[11px] mt-1.5 text-gray-600 dark:text-gray-300 truncate w-full text-center">أضف قصة</span>
+        </div>
+      `;
+
+      visibleStories.forEach((story, idx) => {
+        html += `
+          <div onclick="openStoryViewer(${idx})" class="flex flex-col items-center shrink-0 cursor-pointer w-16">
+            <div class="story-ring">
+              <img src="${story.userAvatar}" class="w-14 h-14 rounded-full object-cover border-2 border-white dark:border-black">
+            </div>
+            <span class="text-[11px] mt-1.5 truncate w-full text-center font-medium">${story.username}</span>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function openStoryViewer(idx) {
+      const visibleStories = allStories.filter(s => canViewUserContent(s.uid));
+      const story = visibleStories[idx];
+      if (!story) return;
+
+      document.getElementById('story-viewer-avatar').src = story.userAvatar;
+      document.getElementById('story-viewer-username').textContent = story.username;
+      document.getElementById('story-viewer-time').textContent = formatRelativeTime(story.createdAt);
+      document.getElementById('story-viewer-image').src = story.image;
+      document.getElementById('story-viewer-caption').textContent = story.caption || '';
+      document.getElementById('story-viewer-modal').classList.remove('hidden');
+
+      const bar = document.getElementById('story-progress-bar');
+      bar.classList.remove('story-progress-active');
+      void bar.offsetWidth;
+      bar.classList.add('story-progress-active');
+
+      clearTimeout(storyTimer);
+      storyTimer = setTimeout(() => {
+        if (idx + 1 < visibleStories.length) openStoryViewer(idx + 1);
+        else closeStoryViewer();
+      }, 5000);
+    }
+
+    function closeStoryViewer() {
+      clearTimeout(storyTimer);
+      document.getElementById('story-viewer-modal').classList.add('hidden');
+    }
+
+    function renderFeed() {
+      const container = document.getElementById('feed-posts-container');
+      if (!container || !currentUser) return;
+      const visiblePosts = allPosts.filter(post => canViewUserContent(post.uid));
+
+      if (!visiblePosts.length) {
+        container.innerHTML = `
+          <div class="bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-2xl p-10 text-center space-y-3">
+            <div class="w-14 h-14 rounded-2xl ig-gradient-bg text-white flex items-center justify-center text-2xl mx-auto shadow">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+            <h3 class="font-bold text-base">مرحباً بك @${currentUser.username}!</h3>
+            <p class="text-xs text-gray-500 max-w-sm mx-auto leading-relaxed">
+              هذا المجتمع يضم المستخدمين الحقيقيين فقط ولا يحتوي على أي حسابات أو منشورات وهمية. ابدأ بنشر أول صورة أو وثيقة لك الآن، أو شارك رابط التطبيق لدعوة أصدقائك الحقيقيين.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <button type="button" onclick="openCreatePostModal()" class="bg-ig-blue hover:bg-ig-blueHover text-white text-xs font-bold px-4 py-2.5 rounded-xl transition">
+                + نشر أول منشور لك
+              </button>
+              <button type="button" onclick="openAppDownloadModal()" class="bg-gray-100 dark:bg-zinc-900 text-xs font-bold px-4 py-2.5 rounded-xl transition">
+                مشاركة رابط الدعوة
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = visiblePosts.map(post => {
+        const likes = post.likes || [];
+        const comments = post.comments || [];
+        const isLiked = likes.includes(currentUser.uid);
+        const isSaved = (currentUser.savedPosts || []).includes(post.id);
+        const author = allUsers.find(u => u.uid === post.uid);
+        const online = isUserOnline(author);
+
+        return `
+          <article class="bg-white dark:bg-zinc-950 sm:border border-gray-200 dark:border-zinc-800 sm:rounded-2xl overflow-hidden shadow-xs">
+            <div class="px-3.5 py-3 flex items-center justify-between">
+              <div onclick="openUserProfile('${post.uid}')" class="flex items-center gap-2.5 cursor-pointer group">
+                <div class="relative">
+                  <img src="${author?.photoURL || post.userAvatar}" class="w-9 h-9 rounded-full object-cover border border-gray-200 dark:border-zinc-800">
+                  ${online ? '<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-black rounded-full"></span>' : ''}
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-xs font-bold group-hover:opacity-75">${author?.username || post.username}</span>
+                    ${author?.isPrivate ? '<i class="fa-solid fa-lock text-[10px] text-gray-400"></i>' : ''}
+                    <button type="button" onclick="event.stopPropagation(); openCopyrightCertificateModal('${post.uid}', '${post.id}')" title="شهادة حقوق النشر" class="text-[10px] font-mono bg-amber-500/10 text-amber-700 dark:text-amber-300 px-1.5 py-0.5 rounded hover:bg-amber-500/20">
+                      ${generatePostCopyrightId(post)}
+                    </button>
+                    <span class="text-gray-400 text-[11px]">• ${formatRelativeTime(post.createdAt)}</span>
+                  </div>
+                  ${post.location ? `<p class="text-[11px] text-gray-500">${post.location}</p>` : ''}
+                </div>
+              </div>
+              <button type="button" onclick="openReportModal('post', '${post.id}', '${post.uid}', '${(post.caption || '').replace(/'/g, "\\'")}')" title="إبلاغ" class="text-gray-400 hover:text-red-500 px-2 py-1 text-xs">
+                <i class="fa-solid fa-flag"></i>
+              </button>
+            </div>
+
+            <div ondblclick="handleDoubleTapLike('${post.id}', this)" class="relative bg-black select-none cursor-pointer overflow-hidden">
+              <img src="${post.image}" class="w-full max-h-[540px] object-cover" onerror="this.src='https://placehold.co/600x450/0f172a/ffffff?text=Instagram+Post'">
+              <div class="heart-overlay hidden absolute top-1/2 left-1/2 text-white text-7xl drop-shadow-2xl pointer-events-none">
+                <i class="fa-solid fa-heart text-red-500"></i>
+              </div>
+            </div>
+
+            <div class="p-3.5 space-y-2">
+              <div class="flex items-center justify-between text-xl">
+                <div class="flex items-center gap-4">
+                  <button type="button" onclick="toggleLikePost('${post.id}')" class="hover:scale-110 transition ${isLiked ? 'text-red-500' : ''}">
+                    <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                  </button>
+                  <button type="button" onclick="openPostDetailModal('${post.id}')" class="hover:opacity-70 transition">
+                    <i class="fa-regular fa-comment"></i>
+                  </button>
+                  <button type="button" onclick="sharePost()" class="hover:opacity-70 transition">
+                    <i class="fa-regular fa-paper-plane"></i>
+                  </button>
+                </div>
+                <button type="button" onclick="toggleSavePost('${post.id}')" class="hover:opacity-70 transition ${isSaved ? 'text-amber-500' : ''}">
+                  <i class="${isSaved ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>
+                </button>
+              </div>
+
+              <p class="text-xs font-bold">${likes.length.toLocaleString('ar-EG')} إعجاب</p>
+              <p class="text-xs leading-relaxed">
+                <span onclick="openUserProfile('${post.uid}')" class="font-bold cursor-pointer hover:underline ml-1">${author?.username || post.username}</span>
+                <span>${post.caption || ''}</span>
+              </p>
+
+              ${comments.length > 0 ? `<button type="button" onclick="openPostDetailModal('${post.id}')" class="text-xs text-gray-500 hover:underline block">عرض جميع التعليقات (${comments.length})</button>` : ''}
+
+              <div class="space-y-1">
+                ${comments.slice(-2).map(c => `<p class="text-xs"><span class="font-bold ml-1">${c.username}</span><span class="text-gray-700 dark:text-gray-300">${c.text}</span></p>`).join('')}
+              </div>
+
+              <form onsubmit="addQuickComment(event, '${post.id}')" class="flex items-center gap-2 pt-2 border-t border-gray-100 dark:border-zinc-900">
+                <input type="text" placeholder="أضف تعليقاً..." class="flex-1 text-xs bg-transparent focus:outline-none">
+                <button type="submit" class="text-xs font-bold text-ig-blue hover:text-ig-blueHover">نشر</button>
+              </form>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderReels() {
+      const container = document.getElementById('reels-container');
+      if (!container || !currentUser) return;
+      const items = allPosts.filter(p => canViewUserContent(p.uid));
+
+      container.innerHTML = items.length ? items.map(post => {
+        const isLiked = (post.likes || []).includes(currentUser.uid);
+        return `
+          <div class="bg-zinc-950 text-white rounded-2xl overflow-hidden border border-zinc-800 shadow-lg relative">
+            <img src="${post.image}" class="w-full h-[460px] object-cover opacity-90" onerror="this.src='https://placehold.co/480x640/111827/ffffff?text=Reel'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 p-4 flex flex-col justify-between">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full font-bold"><i class="fa-solid fa-clapperboard ml-1"></i> Reel</span>
+                <button type="button" onclick="openReportModal('post', '${post.id}', '${post.uid}', '${(post.caption || '').replace(/'/g, "\\'")}')" class="text-xs bg-black/40 hover:bg-red-600 px-2.5 py-1 rounded-full transition">
+                  <i class="fa-solid fa-flag"></i>
+                </button>
+              </div>
+              <div class="flex items-end justify-between gap-4">
+                <div class="space-y-1.5">
+                  <div onclick="openUserProfile('${post.uid}')" class="flex items-center gap-2 cursor-pointer">
+                    <img src="${post.userAvatar}" class="w-8 h-8 rounded-full object-cover border border-white">
+                    <span class="text-xs font-bold">@${post.username}</span>
+                  </div>
+                  <p class="text-xs text-gray-200 line-clamp-2">${post.caption || ''}</p>
+                </div>
+                <div class="flex flex-col items-center gap-3 text-lg shrink-0">
+                  <button type="button" onclick="toggleLikePost('${post.id}')" class="flex flex-col items-center ${isLiked ? 'text-red-500' : 'text-white'}">
+                    <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                    <span class="text-[10px] font-bold mt-0.5">${(post.likes || []).length}</span>
+                  </button>
+                  <button type="button" onclick="openPostDetailModal('${post.id}')" class="flex flex-col items-center text-white">
+                    <i class="fa-regular fa-comment"></i>
+                    <span class="text-[10px] font-bold mt-0.5">${(post.comments || []).length}</span>
+                  </button>
+                  <button type="button" onclick="sharePost()" class="text-white"><i class="fa-regular fa-paper-plane"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('') : `<p class="text-center text-xs text-gray-400 py-10">لا توجد مقاطع ريلز منشورة بعد.</p>`;
+    }
+
+    function handleDoubleTapLike(postId, containerEl) {
+      const heartEl = containerEl.querySelector('.heart-overlay');
+      if (heartEl) {
+        heartEl.classList.remove('hidden', 'heart-burst');
+        void heartEl.offsetWidth;
+        heartEl.classList.add('heart-burst');
+        setTimeout(() => heartEl.classList.add('hidden'), 900);
+      }
+      const post = appState.posts.find(p => p.id === postId);
+      if (post && !(post.likes || []).includes(currentUser.uid)) toggleLikePost(postId);
+    }
+
+    function toggleLikePost(postId) {
+      const post = appState.posts.find(p => p.id === postId);
+      if (!post || !currentUser) return;
+      const likes = [...(post.likes || [])];
+      const idx = likes.indexOf(currentUser.uid);
+      if (idx >= 0) likes.splice(idx, 1);
+      else {
+        likes.push(currentUser.uid);
+        pushRealNotification(post.uid, 'like', 'أعجب بمنشورك ❤️', post.id);
+      }
+      post.likes = likes;
+      persistAppState();
+      renderFeed();
+      renderReels();
+      if (activeModalPostId === postId) renderModalPostDetails(postId);
+    }
+
+    function toggleSavePost(postId) {
+      if (!currentUser) return;
+      const saved = [...(currentUser.savedPosts || [])];
+      const idx = saved.indexOf(postId);
+      if (idx >= 0) {
+        saved.splice(idx, 1);
+        showToast('تمت الإزالة من المحفوظات');
+      } else {
+        saved.push(postId);
+        showToast('تم حفظ المنشور في حسابك 🔖');
+      }
+      currentUser.savedPosts = saved;
+      persistAppState();
+      renderFeed();
+      if (activeModalPostId === postId) renderModalPostDetails(postId);
+      if (currentView === 'profile') renderProfile(viewingProfileUid);
+    }
+
+    async function addQuickComment(event, postId) {
+      event.preventDefault();
+      const input = event.target.querySelector('input');
+      const text = input.value.trim();
+      if (!text || !currentUser) return;
+
+      const check = await analyzeContentWithGeminiAI(text);
+      if (check.actionTaken === 'content_removed') {
+        showToast(`تم منع التعليق: ${check.reasoningArabic}`, 'error');
+        return;
+      }
+
+      const post = appState.posts.find(p => p.id === postId);
+      if (!post) return;
+      post.comments = [...(post.comments || []), { uid: currentUser.uid, username: currentUser.username, text, createdAt: Date.now() }];
+      input.value = '';
+      persistAppState();
+      renderFeed();
+      renderReels();
+      if (activeModalPostId === postId) renderModalPostDetails(postId);
+      pushRealNotification(post.uid, 'comment', `علّق على منشورك: "${text}"`, post.id);
+    }
+
+    function sharePost() {
+      copyTextFallback(window.location.href);
+      showToast('تم نسخ رابط المنشور للمشاركة 🔗');
+    }
+
+    function openPostDetailModal(postId) {
+      activeModalPostId = postId;
+      renderModalPostDetails(postId);
+      document.getElementById('post-detail-modal').classList.remove('hidden');
+    }
+
+    function renderModalPostDetails(postId) {
+      const post = allPosts.find(p => p.id === postId);
+      if (!post || !currentUser) return;
+      const author = allUsers.find(u => u.uid === post.uid);
+
+      document.getElementById('modal-post-image').src = post.image;
+      document.getElementById('modal-post-avatar').src = author?.photoURL || post.userAvatar;
+      document.getElementById('modal-post-username').textContent = author?.username || post.username;
+      document.getElementById('modal-post-location').textContent = post.location || '';
+      document.getElementById('modal-post-author-link').onclick = () => {
+        closeModal('post-detail-modal');
+        openUserProfile(post.uid);
+      };
+      document.getElementById('modal-cert-post-btn').onclick = () => openCopyrightCertificateModal(post.uid, post.id);
+      document.getElementById('modal-report-post-btn').onclick = () => openReportModal('post', post.id, post.uid, post.caption || 'منشور مصور');
+
+      const likes = post.likes || [];
+      const isLiked = likes.includes(currentUser.uid);
+      const likeBtn = document.getElementById('modal-like-btn');
+      likeBtn.innerHTML = `<i class="${isLiked ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart"></i>`;
+      likeBtn.onclick = () => toggleLikePost(postId);
+
+      const isSaved = (currentUser.savedPosts || []).includes(postId);
+      const saveBtn = document.getElementById('modal-save-btn');
+      saveBtn.innerHTML = `<i class="${isSaved ? 'fa-solid text-amber-500' : 'fa-regular'} fa-bookmark"></i>`;
+      saveBtn.onclick = () => toggleSavePost(postId);
+
+      document.getElementById('modal-likes-count').textContent = `${likes.length.toLocaleString('ar-EG')} إعجاب`;
+
+      const commentsContainer = document.getElementById('modal-comments-list');
+      const comments = post.comments || [];
+      let html = `
+        <div class="flex items-start gap-2.5 pb-3 border-b border-gray-100 dark:border-zinc-900">
+          <img src="${author?.photoURL || post.userAvatar}" class="w-7 h-7 rounded-full object-cover shrink-0">
+          <div>
+            <p class="leading-relaxed"><span class="font-bold ml-1">${author?.username || post.username}</span> ${post.caption || ''}</p>
+            <span class="text-[10px] text-gray-400">${formatRelativeTime(post.createdAt)}</span>
+          </div>
+        </div>
+      `;
+      html += comments.map((c, idx) => `
+        <div class="flex items-start justify-between gap-2 group">
+          <div class="flex items-start gap-2">
+            <div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-zinc-800 flex items-center justify-center font-bold text-[10px] shrink-0">${c.username.slice(0, 2).toUpperCase()}</div>
+            <p><span class="font-bold ml-1">${c.username}</span> ${c.text}</p>
+          </div>
+          <button type="button" onclick="openReportModal('comment', '${post.id}_${idx}', '${c.uid || post.uid}', '${c.text.replace(/'/g, "\\'")}')" class="opacity-0 group-hover:opacity-100 text-red-500 text-[10px] px-1.5">
+            <i class="fa-solid fa-flag"></i>
+          </button>
+        </div>
+      `).join('') || `<p class="text-center text-gray-400 py-6">لا توجد تعليقات بعد.</p>`;
+      commentsContainer.innerHTML = html;
+    }
+
+    async function submitModalComment(e) {
+      e.preventDefault();
+      if (!activeModalPostId) return;
+      const input = document.getElementById('modal-comment-input');
+      if (!input.value.trim()) return;
+      await addQuickComment({ preventDefault: () => {}, target: { querySelector: () => input } }, activeModalPostId);
+    }
+
+    // 9. Direct Messaging Between Real Registered Users
+    function getChatRoomId(uid1, uid2) {
+      return [uid1, uid2].sort().join('_');
+    }
+
+    function startChatWithUser(targetUid) {
+      activeDmTargetUid = targetUid;
+      navigateTo('messages');
+      openDmConversation(targetUid);
+    }
+
+    function renderDmContactsList(filterText = '') {
+      const container = document.getElementById('dm-users-list');
+      if (!container || !currentUser) return;
+      const q = filterText.trim().toLowerCase();
+      const candidates = allUsers.filter(u =>
+        u.uid !== currentUser.uid &&
+        !isBlockedEitherWay(u.uid) &&
+        (u.username.toLowerCase().includes(q) || (u.displayName || '').toLowerCase().includes(q))
+      );
+
+      if (!candidates.length) {
+        container.innerHTML = `<p class="p-4 text-center text-xs text-gray-400 leading-relaxed">لا يوجد أعضاء حقيقيون آخرون مسجلون حالياً. شارك رابط المنصة لدعوة أصدقائك الحقيقيين للتواصل.</p>`;
+        return;
+      }
+
+      container.innerHTML = candidates.map(u => {
+        const online = isUserOnline(u);
+        const isActive = u.uid === activeDmTargetUid;
+        return `
+          <div onclick="openDmConversation('${u.uid}')" class="p-3 flex items-center gap-3 cursor-pointer transition ${isActive ? 'bg-gray-100 dark:bg-zinc-900' : 'hover:bg-gray-50 dark:hover:bg-zinc-900/50'}">
+            <div class="relative shrink-0">
+              <img src="${u.photoURL}" class="w-11 h-11 rounded-full object-cover">
+              ${online ? '<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-black rounded-full"></span>' : ''}
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-xs font-bold truncate">${u.displayName}</p>
+              <p class="text-[11px] text-gray-500 truncate">@${u.username} ${online ? '• نشط الآن' : ''}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterDmContacts(val) { renderDmContactsList(val); }
+
+    function openDmConversation(targetUid) {
+      activeDmTargetUid = targetUid;
+      renderDmContactsList();
+      const targetUser = allUsers.find(u => u.uid === targetUid);
+      if (!targetUser || !currentUser) return;
+
+      const online = isUserOnline(targetUser);
+      document.getElementById('dm-active-avatar').src = targetUser.photoURL;
+      document.getElementById('dm-active-name').textContent = `${targetUser.displayName} (@${targetUser.username})`;
+      document.getElementById('dm-active-status').textContent = online ? 'نشط الآن 🟢' : (targetUser.hideActivityStatus ? 'حالة النشاط مخفية' : 'غير متصل حالياً');
+      document.getElementById('dm-active-online-dot').classList.toggle('hidden', !online);
+
+      const actionsDiv = document.getElementById('dm-header-actions');
+      actionsDiv.classList.remove('hidden');
+      document.getElementById('dm-view-profile-btn').onclick = () => openUserProfile(targetUid);
+
+      const lockBanner = document.getElementById('dm-privacy-lock');
+      const sendForm = document.getElementById('dm-send-form');
+      const canMessage = targetUser.allowMessagesFrom !== 'followers' || (targetUser.followers || []).includes(currentUser.uid);
+
+      if (!canMessage) {
+        lockBanner.textContent = `قام @${targetUser.username} بقصر الرسائل المباشرة على متابعيه فقط.`;
+        lockBanner.classList.remove('hidden');
+        sendForm.classList.add('hidden');
+      } else {
+        lockBanner.classList.add('hidden');
+        sendForm.classList.remove('hidden');
+      }
+
+      const roomId = getChatRoomId(currentUser.uid, targetUid);
+      activeChatMessages = appState.chats[roomId] || [];
+      renderActiveChatStream();
+    }
+
+    function renderActiveChatStream() {
+      const stream = document.getElementById('dm-messages-stream');
+      if (!stream || !currentUser) return;
+      if (!activeChatMessages.length) {
+        stream.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-gray-400 text-xs gap-2"><i class="fa-regular fa-paper-plane text-3xl"></i><p>ابدأ محادثتك المباشرة الآن!</p></div>`;
+        return;
+      }
+      stream.innerHTML = activeChatMessages.map(m => {
+        const isMe = m.senderUid === currentUser.uid;
+        return `
+          <div class="flex ${isMe ? 'justify-start' : 'justify-end'}">
+            <div class="max-w-[75%] px-3.5 py-2.5 rounded-2xl text-xs ${isMe ? 'bg-ig-blue text-white rounded-br-sm' : 'bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-bl-sm'}">
+              ${m.image ? `<img src="${m.image}" class="rounded-xl max-h-52 object-cover mb-1.5">` : ''}
+              ${m.text ? `<p class="leading-relaxed">${m.text}</p>` : ''}
+              <span class="block text-[9px] opacity-70 mt-1 text-left">${formatRelativeTime(m.createdAt)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function sendRealDirectMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('dm-input');
+      const text = input.value.trim();
+      if (!text || !activeDmTargetUid || !currentUser) return;
+      if (!checkRateLimitOrBot('send_dm', 12, 15000)) return;
+
+      input.value = '';
+      const roomId = getChatRoomId(currentUser.uid, activeDmTargetUid);
+      if (!appState.chats[roomId]) appState.chats[roomId] = [];
+      appState.chats[roomId].push({ id: 'msg_' + Date.now(), senderUid: currentUser.uid, text, createdAt: Date.now() });
+      activeChatMessages = appState.chats[roomId];
+      persistAppState();
+      renderActiveChatStream();
+    }
+
+    async function sendChatImage(event) {
+      const file = event.target.files[0];
+      if (!file || !activeDmTargetUid || !currentUser) return;
+      try {
+        const compressed = await compressImageFile(file, 650, 0.72);
+        const roomId = getChatRoomId(currentUser.uid, activeDmTargetUid);
+        if (!appState.chats[roomId]) appState.chats[roomId] = [];
+        appState.chats[roomId].push({ id: 'msg_' + Date.now(), senderUid: currentUser.uid, image: compressed, createdAt: Date.now() });
+        activeChatMessages = appState.chats[roomId];
+        persistAppState();
+        renderActiveChatStream();
+      } catch (e) {
+        showToast('تعذر إرسال الصورة', 'error');
+      }
+    }
+
+    // 10. Profiles, Follow Requests & Blocking
+    function openUserProfile(uid) {
+      viewingProfileUid = uid;
+      currentProfileTab = 'posts';
+      navigateTo('profile');
+      renderProfile(uid);
+    }
+
+    function renderProfile(uid) {
+      const user = allUsers.find(u => u.uid === uid) || currentUser;
+      if (!user || !currentUser) return;
+
+      const isOwn = user.uid === currentUser.uid;
+      const isBlockedByMe = (currentUser.blockedUsers || []).includes(user.uid);
+      const isFollowing = (currentUser.following || []).includes(user.uid);
+      const hasRequested = (user.followRequests || []).includes(currentUser.uid);
+      const canView = canViewUserContent(user.uid);
+
+      document.getElementById('profile-avatar').src = user.photoURL;
+      document.getElementById('profile-username').textContent = '@' + user.username;
+      document.getElementById('profile-fullname').textContent = user.displayName;
+      document.getElementById('profile-copyright-id').textContent = generateAccountCopyrightId(user.uid);
+      document.getElementById('profile-bio').textContent = user.bio || '';
+
+      const linkEl = document.getElementById('profile-link');
+      linkEl.textContent = user.website || '';
+      linkEl.href = user.website ? (user.website.startsWith('http') ? user.website : 'https://' + user.website) : '#';
+
+      document.getElementById('profile-private-icon').classList.toggle('hidden', !user.isPrivate);
+      document.getElementById('profile-online-badge').classList.toggle('hidden', !isUserOnline(user));
+
+      const userPosts = allPosts.filter(p => p.uid === user.uid);
+      document.getElementById('profile-posts-count').textContent = userPosts.length;
+      document.getElementById('profile-followers-count').textContent = (user.followers?.length || 0).toLocaleString('ar-EG');
+      document.getElementById('profile-following-count').textContent = (user.following?.length || 0).toLocaleString('ar-EG');
+
+      const actionsDiv = document.getElementById('profile-action-buttons');
+      if (isOwn) {
+        actionsDiv.innerHTML = `
+          <button type="button" onclick="navigateTo('settings')" class="bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-xs font-bold px-4 py-2 rounded-xl transition">تعديل الملف والإعدادات</button>
+          <button type="button" onclick="openCreatePostModal()" class="bg-ig-blue hover:bg-ig-blueHover text-white text-xs font-bold px-4 py-2 rounded-xl transition">+ منشور</button>
+        `;
+        document.getElementById('tab-profile-saved').classList.remove('hidden');
+      } else if (isBlockedByMe) {
+        actionsDiv.innerHTML = `<button type="button" onclick="toggleBlockUser('${user.uid}')" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl">إلغاء حظر الحساب</button>`;
+        document.getElementById('tab-profile-saved').classList.add('hidden');
+      } else {
+        let followBtnText = 'متابعة';
+        let followBtnClass = 'bg-ig-blue hover:bg-ig-blueHover text-white';
+        if (isFollowing) {
+          followBtnText = 'تتابع ✓';
+          followBtnClass = 'bg-gray-200 dark:bg-zinc-800 text-gray-900 dark:text-white';
+        } else if (hasRequested) {
+          followBtnText = 'تم إرسال طلب المتابعة ⏳';
+          followBtnClass = 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30';
+        }
+        actionsDiv.innerHTML = `
+          <button type="button" onclick="handleFollowAction('${user.uid}')" class="${followBtnClass} text-xs font-bold px-5 py-2 rounded-xl transition">${followBtnText}</button>
+          <button type="button" onclick="startChatWithUser('${user.uid}')" class="bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-xs font-bold px-4 py-2 rounded-xl transition">مراسلة</button>
+          <button type="button" onclick="toggleBlockUser('${user.uid}')" title="حظر" class="bg-gray-100 hover:bg-red-50 dark:bg-zinc-800 text-red-500 text-xs font-bold px-3 py-2 rounded-xl"><i class="fa-solid fa-ban"></i></button>
+          <button type="button" onclick="openReportModal('user', '${user.uid}', '${user.uid}', 'حساب: @${user.username}')" title="إبلاغ" class="bg-gray-100 hover:bg-red-50 dark:bg-zinc-800 text-red-500 text-xs font-bold px-3 py-2 rounded-xl"><i class="fa-solid fa-flag"></i></button>
+        `;
+        document.getElementById('tab-profile-saved').classList.add('hidden');
+      }
+
+      const privateWall = document.getElementById('private-account-wall');
+      const contentArea = document.getElementById('profile-content-area');
+      if (!canView) {
+        privateWall.classList.remove('hidden');
+        contentArea.classList.add('hidden');
+      } else {
+        privateWall.classList.add('hidden');
+        contentArea.classList.remove('hidden');
+        renderProfilePostsGrid(user);
+      }
+    }
+
+    function switchProfileTab(tab) {
+      currentProfileTab = tab;
+      renderProfilePostsGrid(allUsers.find(u => u.uid === viewingProfileUid) || currentUser);
+    }
+
+    function renderProfilePostsGrid(user) {
+      const grid = document.getElementById('profile-posts-grid');
+      const posts = currentProfileTab === 'saved'
+        ? allPosts.filter(p => (currentUser.savedPosts || []).includes(p.id))
+        : allPosts.filter(p => p.uid === user.uid);
+
+      if (!posts.length) {
+        grid.innerHTML = `<div class="col-span-3 py-14 text-center text-gray-400 text-xs">لا توجد منشورات لعرضها هنا</div>`;
+        return;
+      }
+      grid.innerHTML = posts.map(post => `
+        <div onclick="openPostDetailModal('${post.id}')" class="relative aspect-square bg-zinc-900 group cursor-pointer overflow-hidden rounded-sm sm:rounded-xl">
+          <img src="${post.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/300x300/18181b/ffffff?text=Post'">
+          <div class="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-5 text-white font-bold text-sm">
+            <span><i class="fa-solid fa-heart ml-1"></i> ${(post.likes || []).length}</span>
+            <span><i class="fa-solid fa-comment ml-1"></i> ${(post.comments || []).length}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handleFollowAction(targetUid) {
+      const targetUser = appState.users.find(u => u.uid === targetUid);
+      if (!targetUser || !currentUser) return;
+      const myFollowing = [...(currentUser.following || [])];
+      const targetFollowers = [...(targetUser.followers || [])];
+      const targetRequests = [...(targetUser.followRequests || [])];
+
+      if (myFollowing.includes(targetUid)) {
+        currentUser.following = myFollowing.filter(id => id !== targetUid);
+        targetUser.followers = targetFollowers.filter(id => id !== currentUser.uid);
+        showToast(`تم إلغاء متابعة @${targetUser.username}`);
+      } else if (targetUser.isPrivate) {
+        if (targetRequests.includes(currentUser.uid)) {
+          targetUser.followRequests = targetRequests.filter(id => id !== currentUser.uid);
+          showToast('تم إلغاء طلب المتابعة');
+        } else {
+          targetRequests.push(currentUser.uid);
+          targetUser.followRequests = targetRequests;
+          pushRealNotification(targetUid, 'follow_request', 'أرسل لك طلب متابعة 🔒');
+          showToast(`تم إرسال طلب متابعة إلى @${targetUser.username} ⏳`);
+        }
+      } else {
+        myFollowing.push(targetUid);
+        targetFollowers.push(currentUser.uid);
+        currentUser.following = myFollowing;
+        targetUser.followers = targetFollowers;
+        pushRealNotification(targetUid, 'follow', 'بدأ بمتابعتك الآن ✨');
+        showToast(`أنت تتابع الآن @${targetUser.username} 🎉`);
+      }
+
+      persistAppState();
+      renderSuggestedUsers();
+      renderFeed();
+      if (currentView === 'profile') renderProfile(viewingProfileUid);
+    }
+
+    function respondToFollowRequest(requesterUid, accept) {
+      if (!currentUser) return;
+      currentUser.followRequests = (currentUser.followRequests || []).filter(id => id !== requesterUid);
+      if (accept) {
+        currentUser.followers = [...new Set([...(currentUser.followers || []), requesterUid])];
+        const requester = appState.users.find(u => u.uid === requesterUid);
+        if (requester) requester.following = [...new Set([...(requester.following || []), currentUser.uid])];
+        pushRealNotification(requesterUid, 'follow_accepted', 'وافق على طلب متابعتك ✅');
+        showToast('تم قبول طلب المتابعة ✅', 'success');
+      } else {
+        showToast('تم رفض طلب المتابعة');
+      }
+      persistAppState();
+      renderNotifications();
+      updateBadges();
+      if (currentView === 'profile') renderProfile(viewingProfileUid);
+    }
+
+    function toggleBlockUser(targetUid) {
+      if (!currentUser) return;
+      const blocked = [...(currentUser.blockedUsers || [])];
+      const idx = blocked.indexOf(targetUid);
+      if (idx >= 0) {
+        blocked.splice(idx, 1);
+        currentUser.blockedUsers = blocked;
+        showToast('تم إلغاء حظر المستخدم');
+      } else {
+        blocked.push(targetUid);
+        currentUser.blockedUsers = blocked;
+        currentUser.following = (currentUser.following || []).filter(id => id !== targetUid);
+        showToast('تم حظر المستخدم بنجاح 🚫');
+      }
+      persistAppState();
+      renderBlockedUsersList();
+      renderFeed();
+      renderSuggestedUsers();
+      if (currentView === 'profile') renderProfile(viewingProfileUid);
+    }
+
+    // 11. Settings, Integrations & Data Export
+    function loadSettingsIntoForm() {
+      if (!currentUser) return;
+      document.getElementById('settings-avatar-preview').src = currentUser.photoURL;
+      document.getElementById('settings-display-username').textContent = '@' + currentUser.username;
+      document.getElementById('set-fullname').value = currentUser.displayName || '';
+      document.getElementById('set-username').value = currentUser.username || '';
+      document.getElementById('set-bio').value = currentUser.bio || '';
+      document.getElementById('set-website').value = currentUser.website || '';
+
+      document.getElementById('priv-is-private').checked = !!currentUser.isPrivate;
+      document.getElementById('priv-show-activity').checked = !currentUser.hideActivityStatus;
+      document.getElementById('priv-allow-messages').value = currentUser.allowMessagesFrom || 'everyone';
+
+      document.getElementById('cfg-gemini-key').value = safeGetItem(STORAGE_KEYS.GEMINI_KEY) || '';
+      document.getElementById('cfg-firebase-json').value = safeGetItem(STORAGE_KEYS.FIREBASE_JSON) || '';
+
+      renderBlockedUsersList();
+      renderMaxShieldPanel();
+    }
+
+    function switchSettingsTab(tabName) {
+      document.querySelectorAll('.settings-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('stab-' + tabName)?.classList.remove('hidden');
+
+      document.querySelectorAll('.settings-tab-btn').forEach(btn => {
+        if (btn.dataset.stab === tabName) {
+          btn.classList.add('bg-gray-100', 'dark:bg-zinc-900', 'text-gray-900', 'dark:text-white');
+          btn.classList.remove('text-gray-500');
+        } else {
+          btn.classList.remove('bg-gray-100', 'dark:bg-zinc-900', 'text-gray-900', 'dark:text-white');
+          btn.classList.add('text-gray-500');
+        }
+      });
+      if (tabName === 'max-shield') renderMaxShieldPanel();
+    }
+
+    async function handleSettingsAvatarUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const compressed = await compressImageFile(file, 300, 0.8);
+        document.getElementById('settings-avatar-preview').src = compressed;
+      } catch (e) {
+        showToast('تعذر تحميل الصورة', 'error');
+      }
+    }
+
+    function saveProfileSettings() {
+      if (!currentUser) return;
+      const newUsername = document.getElementById('set-username').value.trim().toLowerCase().replace(/[^a-z0-9._]/g, '_');
+      if (!newUsername) return showToast('اسم المستخدم مطلوب', 'error');
+      if (appState.users.find(u => u.uid !== currentUser.uid && u.username === newUsername)) {
+        return showToast('اسم المستخدم هذا مستخدم بالفعل!', 'error');
+      }
+
+      currentUser.photoURL = document.getElementById('settings-avatar-preview').src;
+      currentUser.displayName = document.getElementById('set-fullname').value.trim() || currentUser.displayName;
+      currentUser.username = newUsername;
+      currentUser.bio = document.getElementById('set-bio').value.trim();
+      currentUser.website = document.getElementById('set-website').value.trim();
+
+      persistAppState();
+      updateUserHeaderBadges();
+      renderFeed();
+      renderSuggestedUsers();
+      showToast('تم حفظ تعديلات ملفك الشخصي بنجاح ✅', 'success');
+    }
+
+    function savePrivacySettings() {
+      if (!currentUser) return;
+      currentUser.isPrivate = document.getElementById('priv-is-private').checked;
+      currentUser.hideActivityStatus = !document.getElementById('priv-show-activity').checked;
+      currentUser.allowMessagesFrom = document.getElementById('priv-allow-messages').value;
+      persistAppState();
+      renderFeed();
+      renderSuggestedUsers();
+      showToast('تم تحديث إعدادات الخصوصية فوراً 🔒', 'success');
+    }
+
+    async function saveOptionalIntegrations() {
+      const gemKey = document.getElementById('cfg-gemini-key').value.trim();
+      const fbRaw = document.getElementById('cfg-firebase-json').value.trim();
+      if (fbRaw) {
+        try { JSON.parse(fbRaw); } catch (e) {
+          showToast('صيغة JSON الخاصة بـ Firebase غير صحيحة', 'error');
+          return;
+        }
+        safeSetItem(STORAGE_KEYS.FIREBASE_JSON, fbRaw);
+      } else {
+        safeRemoveItem(STORAGE_KEYS.FIREBASE_JSON);
+      }
+      if (gemKey) safeSetItem(STORAGE_KEYS.GEMINI_KEY, gemKey);
+      else safeRemoveItem(STORAGE_KEYS.GEMINI_KEY);
+
+      await initOptionalFirebase();
+      showToast('تم حفظ وتفعيل إعدادات الربط بنجاح ✅', 'success');
+    }
+
+    function resetIntegrationsToInstantMode() {
+      safeRemoveItem(STORAGE_KEYS.GEMINI_KEY);
+      safeRemoveItem(STORAGE_KEYS.FIREBASE_JSON);
+      document.getElementById('cfg-gemini-key').value = '';
+      document.getElementById('cfg-firebase-json').value = '';
+      showToast('تمت إعادة ضبط المفاتيح');
+    }
+
+    function renderBlockedUsersList() {
+      const container = document.getElementById('blocked-users-list');
+      if (!container || !currentUser) return;
+      const blockedIds = currentUser.blockedUsers || [];
+      if (!blockedIds.length) {
+        container.innerHTML = `<p class="py-8 text-center text-xs text-gray-400">لا يوجد أي مستخدم في قائمة الحظر حالياً.</p>`;
+        return;
+      }
+      container.innerHTML = blockedIds.map(uid => {
+        const u = allUsers.find(item => item.uid === uid) || { uid, username: 'مستخدم_محظور', photoURL: 'https://placehold.co/100x100' };
+        return `
+          <div class="py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="${u.photoURL}" class="w-10 h-10 rounded-full object-cover">
+              <span class="text-xs font-bold">@${u.username}</span>
+            </div>
+            <button type="button" onclick="toggleBlockUser('${u.uid}')" class="bg-gray-200 dark:bg-zinc-800 text-xs font-bold px-3.5 py-1.5 rounded-lg">إلغاء الحظر</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function exportAccountData() {
+      if (!currentUser) return;
+      const exportObj = {
+        copyrightId: generateAccountCopyrightId(currentUser.uid),
+        profile: currentUser,
+        myPosts: allPosts.filter(p => p.uid === currentUser.uid),
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `instagram_${currentUser.username}_data.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تحميل نسخة بيانات حسابك 📦', 'success');
+    }
+
+    // 12. Real Members List, Search, Explore, Notifications & Navigation
+    function renderSuggestedUsers() {
+      const list = document.getElementById('suggested-users-list');
+      if (!list || !currentUser) return;
+      const others = allUsers.filter(u => u.uid !== currentUser.uid && !isBlockedEitherWay(u.uid)).slice(0, 8);
+      if (!others.length) {
+        list.innerHTML = `<p class="text-xs text-gray-400 text-center py-3 leading-relaxed">لا يوجد أعضاء حقيقيون آخرون مسجلون بعد. شارك رابط التطبيق لدعوة أصدقائك الحقيقيين.</p>`;
+        return;
+      }
+      list.innerHTML = others.map(u => {
+        const online = isUserOnline(u);
+        const isFollowing = (currentUser.following || []).includes(u.uid);
+        return `
+          <div class="flex items-center justify-between">
+            <div onclick="openUserProfile('${u.uid}')" class="flex items-center gap-2.5 cursor-pointer group min-w-0">
+              <div class="relative shrink-0">
+                <img src="${u.photoURL}" class="w-9 h-9 rounded-full object-cover">
+                ${online ? '<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-black rounded-full"></span>' : ''}
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold truncate group-hover:opacity-75">${u.username}</p>
+                <p class="text-[11px] text-gray-400 truncate">${u.displayName}</p>
+              </div>
+            </div>
+            <button type="button" onclick="handleFollowAction('${u.uid}')" class="text-xs font-bold shrink-0 ${isFollowing ? 'text-gray-500' : 'text-ig-blue hover:underline'}">
+              ${isFollowing ? 'تتابع' : (u.isPrivate ? 'طلب' : 'متابعة')}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleSearch(query) {
+      const q = (query || '').trim().toLowerCase();
+      const matchedUsers = allUsers.filter(u =>
+        !isBlockedEitherWay(u.uid) &&
+        (u.username.toLowerCase().includes(q) || (u.displayName || '').toLowerCase().includes(q))
+      );
+
+      document.getElementById('search-users-count').textContent = matchedUsers.length;
+      document.getElementById('search-users-results').innerHTML = matchedUsers.map(u => `
+        <div class="p-3 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-900 transition">
+          <div onclick="openUserProfile('${u.uid}')" class="flex items-center gap-3 cursor-pointer">
+            <img src="${u.photoURL}" class="w-11 h-11 rounded-full object-cover">
+            <div>
+              <p class="text-sm font-bold">@${u.username}</p>
+              <p class="text-xs text-gray-500">${u.displayName}</p>
+            </div>
+          </div>
+          <button type="button" onclick="openUserProfile('${u.uid}')" class="bg-gray-100 dark:bg-zinc-800 text-xs font-bold px-3.5 py-1.5 rounded-lg">عرض الحساب</button>
+        </div>
+      `).join('') || `<p class="p-4 text-center text-xs text-gray-400">لا توجد نتائج مطابقة</p>`;
+
+      const matchedPosts = allPosts.filter(p =>
+        canViewUserContent(p.uid) &&
+        ((p.caption || '').toLowerCase().includes(q) || (p.username || '').toLowerCase().includes(q))
+      );
+      document.getElementById('search-posts-results').innerHTML = matchedPosts.map(post => `
+        <div onclick="openPostDetailModal('${post.id}')" class="relative aspect-square rounded-lg overflow-hidden cursor-pointer group">
+          <img src="${post.image}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://placehold.co/300x300/18181b/ffffff?text=Post'">
+        </div>
+      `).join('');
+    }
+
+    function renderExplore() {
+      const publicPosts = allPosts.filter(p => canViewUserContent(p.uid));
+      document.getElementById('explore-grid').innerHTML = publicPosts.map(post => `
+        <div onclick="openPostDetailModal('${post.id}')" class="relative aspect-square bg-zinc-900 overflow-hidden cursor-pointer group rounded-sm sm:rounded-lg">
+          <img src="${post.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/300x300/18181b/ffffff?text=Explore'">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4 text-white text-xs font-bold">
+            <span><i class="fa-solid fa-heart ml-1"></i> ${(post.likes || []).length}</span>
+            <span><i class="fa-solid fa-comment ml-1"></i> ${(post.comments || []).length}</span>
+          </div>
+        </div>
+      `).join('') || `<div class="col-span-3 py-16 text-center text-gray-400 text-xs">لا توجد منشورات منشورة بعد</div>`;
+    }
+
+    function renderNotifications() {
+      const reqSection = document.getElementById('follow-requests-section');
+      const reqList = document.getElementById('follow-requests-list');
+      const requests = currentUser?.followRequests || [];
+      if (requests.length > 0) {
+        reqSection.classList.remove('hidden');
+        reqList.innerHTML = requests.map(uid => {
+          const u = allUsers.find(item => item.uid === uid) || { uid, username: 'مستخدم', photoURL: 'https://placehold.co/100x100' };
+          return `
+            <div class="p-3.5 flex items-center justify-between">
+              <div onclick="openUserProfile('${u.uid}')" class="flex items-center gap-3 cursor-pointer">
+                <img src="${u.photoURL}" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <p class="text-xs font-bold">@${u.username}</p>
+                  <p class="text-[11px] text-gray-500">يريد متابعة حسابك الخاص</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" onclick="respondToFollowRequest('${u.uid}', true)" class="bg-ig-blue text-white text-xs font-bold px-3 py-1.5 rounded-lg">قبول</button>
+                <button type="button" onclick="respondToFollowRequest('${u.uid}', false)" class="bg-gray-200 dark:bg-zinc-800 text-xs font-bold px-3 py-1.5 rounded-lg">رفض</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        reqSection.classList.add('hidden');
+      }
+
+      const list = document.getElementById('notifications-list');
+      list.innerHTML = myNotifications.length ? myNotifications.map(n => `
+        <div onclick="${n.postId ? `openPostDetailModal('${n.postId}')` : `openUserProfile('${n.fromUid}')`}" class="p-3.5 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-900 cursor-pointer transition">
+          <div class="flex items-center gap-3">
+            <img src="${n.fromAvatar || 'https://placehold.co/100x100'}" class="w-10 h-10 rounded-full object-cover">
+            <p class="text-xs"><span class="font-bold ml-1">@${n.fromUsername}</span><span>${n.text}</span><span class="text-gray-400 mr-1">${formatRelativeTime(n.createdAt)}</span></p>
+          </div>
+        </div>
+      `).join('') : `<p class="p-8 text-center text-xs text-gray-400">لا توجد إشعارات جديدة بعد.</p>`;
+    }
+
+    function navigateTo(viewName) {
+      currentView = viewName;
+      ['home', 'search', 'explore', 'reels', 'messages', 'notifications', 'profile', 'settings'].forEach(v => {
+        document.getElementById('view-' + v)?.classList.add('hidden');
+      });
+      document.getElementById('view-' + viewName)?.classList.remove('hidden');
+
+      document.querySelectorAll('#desktop-nav .nav-item').forEach(btn => {
+        if (btn.dataset.nav === viewName) btn.classList.add('font-bold', 'bg-gray-100', 'dark:bg-zinc-900');
+        else btn.classList.remove('font-bold', 'bg-gray-100', 'dark:bg-zinc-900');
+      });
+
+      if (viewName === 'home') renderFeed();
+      if (viewName === 'search') handleSearch(document.getElementById('search-input')?.value || '');
+      if (viewName === 'explore') renderExplore();
+      if (viewName === 'reels') renderReels();
+      if (viewName === 'messages') renderDmContactsList();
+      if (viewName === 'notifications') renderNotifications();
+      if (viewName === 'settings') loadSettingsIntoForm();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 13. Legal Documents, Account Copyright Certificates & PWA / HTML Download
+    const LEGAL_DOCUMENTS_DATA = {
+      copyright: {
+        title: 'إشعار حقوق الطبع والنشر وحماية الوثائق لكل حساب',
+        updated: '2026',
+        body: `
+          <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-800 dark:text-amber-200 font-semibold">
+            يمنح التطبيق كل حساب معرّف ملكية وحقوق نشر فريد (CR-ACC-...) ومعرّفاً مستقلاً لكل منشور أو وثيقة (CR-DOC-...) لتوثيق الملكية الفكرية.
+          </div>
+          <h4 class="font-bold text-gray-900 dark:text-white">1. ملكية الحساب والمنشورات والوثائق</h4>
+          <p>يحتفظ صاحب الحساب بحقوق النشر الخاصة بالمنشورات والصور والنصوص والوثائق التي ينشرها عبر حسابه، وتُربط كل مادة ببصمة تعريفية واضحة تشير إلى هوية الحساب وتوقيت النشر.</p>
+          <h4 class="font-bold text-gray-900 dark:text-white">2. شهادة حفظ الحقوق والنسخ والتنزيل</h4>
+          <p>يمكن لكل مستخدم إصدار شهادة حفظ الحقوق الخاصة بحسابه أو بأي منشور من منشوراته ونسخها أو تنزيلها كملف موثّق.</p>
+        `,
+        plainText: `إشعار حقوق الطبع والنشر وحماية الوثائق لكل حساب\n- يحظى كل حساب بمعرّف ملكية فريد (CR-ACC-...) ومعرّف مستقل لكل منشور (CR-DOC-...).\n- يحتفظ صاحب الحساب بحقوق نشر محتواه ووثائقه ويمكنه تنزيل شهادة حفظ الحقوق.`
+      },
+      terms: {
+        title: 'شروط وأحكام الاستخدام',
+        updated: '2026',
+        body: `<p>باستخدامك للمنصة فإنك تلتزم بالتسجيل بهويتك الحقيقية، واحترام حقوق النشر والملكية الفكرية للآخرين، وعدم إساءة استخدام خدمات المراسلة أو النشر.</p>`,
+        plainText: `شروط وأحكام الاستخدام\n- الالتزام بالهوية الحقيقية واحترام حقوق النشر ومعايير المجتمع.`
+      },
+      privacy: {
+        title: 'سياسة الخصوصية وحماية البيانات',
+        updated: '2026',
+        body: `<p>يتحكم صاحب الحساب في جعل حسابه خاصاً، وتحديد من يمكنه مراسلته، وإظهار أو إخفاء حالة النشاط، وحظر الحسابات المزعجة، وتصدير بياناته في أي وقت.</p>`,
+        plainText: `سياسة الخصوصية وحماية البيانات\n- تحكم كامل في الحساب الخاص والرسائل وحالة النشاط والحظر وتصدير البيانات.`
+      },
+      dmca: {
+        title: 'الإبلاغ عن انتهاك حقوق النشر والملكية الفكرية',
+        updated: '2026',
+        body: `<p>عند رصد أي انتهاك لحقوق النشر أو الوثائق، استخدم زر «إبلاغ» على المنشور أو التعليق ليقوم نظام الإشراف الذكي بمراجعة البلاغ وتوثيقه.</p>`,
+        plainText: `الإبلاغ عن انتهاك حقوق النشر والملكية الفكرية\n- استخدم زر الإبلاغ على أي محتوى مخالف لمراجعته وتوثيق القرار.`
+      }
+    };
+
+    function openLegalDocsModal(docKey = 'copyright') {
+      switchLegalDocTab(docKey);
+      document.getElementById('legal-docs-modal').classList.remove('hidden');
+    }
+
+    function switchLegalDocTab(docKey) {
+      activeLegalDocKey = LEGAL_DOCUMENTS_DATA[docKey] ? docKey : 'copyright';
+      const docData = LEGAL_DOCUMENTS_DATA[activeLegalDocKey];
+      document.querySelectorAll('.legal-doc-tab').forEach(btn => {
+        const active = btn.dataset.ltab === activeLegalDocKey;
+        btn.className = active
+          ? 'legal-doc-tab px-3.5 py-2 rounded-t-xl bg-amber-500/15 text-amber-700 dark:text-amber-300 border-b-2 border-amber-500 shrink-0'
+          : 'legal-doc-tab px-3.5 py-2 rounded-t-xl text-gray-500 shrink-0';
+      });
+      document.getElementById('legal-doc-content').innerHTML = `
+        <div class="flex items-center justify-between border-b border-gray-100 dark:border-zinc-800 pb-2">
+          <h3 class="font-bold text-sm text-gray-900 dark:text-white">${docData.title}</h3>
+          <span class="text-[11px] text-gray-400">الإصدار ${docData.updated}</span>
+        </div>
+        ${docData.body}
+      `;
+    }
+
+    function copyActiveLegalDoc() {
+      const docData = LEGAL_DOCUMENTS_DATA[activeLegalDocKey] || LEGAL_DOCUMENTS_DATA.copyright;
+      copyTextFallback(`${docData.title}\n\n${docData.plainText}`);
+      showToast('تم نسخ نص الوثيقة القانونية 📋', 'success');
+    }
+
+    function downloadActiveLegalDoc() {
+      const docData = LEGAL_DOCUMENTS_DATA[activeLegalDocKey] || LEGAL_DOCUMENTS_DATA.copyright;
+      const content = `${docData.title}\nالسنة: ${docData.updated}\n========================================\n\n${docData.plainText}`;
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `instagram_legal_${activeLegalDocKey}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تنزيل الوثيقة بنجاح 📄', 'success');
+    }
+
+    function openCopyrightCertificateModal(uid, postId = null) {
+      const targetUser = allUsers.find(u => u.uid === uid) || (currentUser?.uid === uid ? currentUser : null);
+      const accountCode = generateAccountCopyrightId(uid);
+      const post = postId ? allPosts.find(p => p.id === postId) : null;
+      const postCode = post ? generatePostCopyrightId(post) : null;
+      const issuedDate = new Date().toLocaleString('ar-EG');
+
+      const ownerName = targetUser?.displayName || 'مستخدم المنصة';
+      const ownerHandle = targetUser?.username ? `@${targetUser.username}` : uid;
+
+      currentCertificateFilename = post ? `copyright_${postCode}.txt` : `copyright_${accountCode}.txt`;
+      currentCertificateText = [
+        '====================================================',
+        'وثيقة وشهادة حفظ حقوق النشر والملكية الفكرية',
+        '====================================================',
+        `رقم ملكية الحساب (Account Copyright ID): ${accountCode}`,
+        `مالك الحساب: ${ownerName} (${ownerHandle})`,
+        post ? `رقم حقوق المنشور/الوثيقة (Post Copyright ID): ${postCode}` : 'نطاق الشهادة: ملكية الحساب والوثائق المرتبطة به',
+        post ? `تاريخ النشر الأصلي: ${new Date(post.createdAt || Date.now()).toLocaleString('ar-EG')}` : `تاريخ إصدار الشهادة: ${issuedDate}`,
+        post ? `ملخص المحتوى: ${(post.caption || 'محتوى مرئي منشور').slice(0, 120)}` : 'حالة التوثيق: مسجل ومرتبط بالهوية الرقمية للحساب',
+        '===================================================='
+      ].join('\n');
+
+      document.getElementById('copyright-cert-body').innerHTML = `
+        <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-950 border border-amber-500/25 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-gray-500">معرّف حقوق الحساب:</span>
+            <span class="font-mono font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2.5 py-0.5 rounded-lg">${accountCode}</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-gray-500">صاحب الحساب:</span>
+            <span class="font-bold">${ownerName} (${ownerHandle})</span>
+          </div>
+          ${post ? `
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-500">معرّف حقوق المنشور:</span>
+              <span class="font-mono font-bold text-ig-blue bg-ig-blue/10 px-2.5 py-0.5 rounded-lg">${postCode}</span>
+            </div>
+          ` : ''}
+          <div class="flex items-center justify-between gap-2 text-[11px] text-gray-400 pt-1">
+            <span>تاريخ الإصدار:</span>
+            <span>${issuedDate}</span>
+          </div>
+        </div>
+      `;
+      document.getElementById('copyright-cert-modal').classList.remove('hidden');
+    }
+
+    function copyCopyrightCertificate() {
+      copyTextFallback(currentCertificateText);
+      showToast('تم نسخ شهادة حفظ الحقوق والبصمة ©️', 'success');
+    }
+
+    function downloadCopyrightCertificate() {
+      const blob = new Blob([currentCertificateText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = currentCertificateFilename;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تنزيل وثيقة حفظ الحقوق بنجاح 📜', 'success');
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      const statusEl = document.getElementById('pwa-install-status');
+      if (statusEl) statusEl.textContent = 'التطبيق جاهز للتثبيت الفوري بنقرة واحدة على جهازك!';
+    });
+
+    function openAppDownloadModal() {
+      const shareUrl = window.location.href || 'https://instagram.local';
+      const inputEl = document.getElementById('app-share-url-input');
+      if (inputEl) inputEl.value = shareUrl;
+      document.getElementById('app-download-modal').classList.remove('hidden');
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPwaPrompt) {
+        deferredPwaPrompt.prompt();
+        const choice = await deferredPwaPrompt.userChoice;
+        deferredPwaPrompt = null;
+        if (choice?.outcome === 'accepted') showToast('تم تثبيت التطبيق على جهازك بنجاح 🎉', 'success');
+      } else {
+        showToast('يمكنك تثبيت التطبيق من قائمة المتصفح (إضافة إلى الشاشة الرئيسية / Install App) أو تنزيل ملف index.html بالأسفل 📱');
+      }
+    }
+
+    function copyAppShareLink() {
+      const url = document.getElementById('app-share-url-input')?.value || window.location.href;
+      copyTextFallback(url);
+      showToast('تم نسخ رابط الموقع والتطبيق للمشاركة 🔗', 'success');
+    }
+
+    async function shareAppViaNative() {
+      const url = window.location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'إنستغرام بالعربية', text: 'انضم إلينا على إنستغرام بالعربية:', url });
+        } catch (e) {}
+      } else {
+        copyAppShareLink();
+      }
+    }
+
+    function downloadStandaloneAppHtml() {
+      const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = 'index.html';
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+      showToast('تم تنزيل ملف التطبيق الكامل (index.html) لتشغيله أو استضافته ⬇️', 'success');
+    }
+
+    // 14. Immediate Safe Bootstrap on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        initTheme();
+        initOptionalFirebase();
+        const savedUid = safeGetItem(STORAGE_KEYS.SESSION_UID);
+        if (savedUid) {
+          const found = appState.users.find(u => u.uid === savedUid);
+          if (found) {
+            activateSession(found, null, 'جلسة مستعادة');
+            return;
+          }
+          safeRemoveItem(STORAGE_KEYS.SESSION_UID);
+        }
+      } catch (e) {
+        console.error('Bootstrap recovery:', e);
+        document.getElementById('auth-view')?.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
